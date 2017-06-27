@@ -1,7 +1,7 @@
 
 # Welcome
 
-[[Computer Programming]]
+[Computer Programming](computer_programming.md)
 
 [Computer Programming]
 
