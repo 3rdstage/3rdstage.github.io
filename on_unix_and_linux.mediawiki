@@ -1,0 +1,883 @@
+<div class="toclimit-3 right">__TOC__</div>
+
+<div class='by-3rdstage'>
+
+==Basic==
+
+* [http://pubs.opengroup.org/onlinepubs/9699919799/ POSIX.1-2008]
+* [http://refspecs.linuxfoundation.org/ Linux Foundation Referenced Specifications]
+* [http://refspecs.linuxfoundation.org/fhs.shtml Filesystem Hierarchy Standard]
+** [http://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html Hierarchy Standard 3.0] (June 3, 2015)
+** [http://refspecs.linuxfoundation.org/FHS_2.3/fhs-2.3.html Hierarchy Standard 2.3] (January 29, 2004)
+* [https://www.kernel.org/doc/man-pages/ The Linux man-pages project]
+* [https://github.com/torvalds/linux Linux kernel source]
+* [http://cygwin.com/cygwin-ug-net/cygwin-ug-net.html Cygwin User's Guide]
+
+* [http://en.wikipedia.org/wiki/Device_node Device file]
+* [http://en.wikipedia.org/wiki/Device_mapper Device mapper]
+* [http://www.binarytides.com/linux-commands-hardware-info/ 16 commands to check hardware information on Linux] (Apr 8, 2014)
+* [http://en.wikipedia.org/wiki/LVM2 Logical Volume Manager]
+** <code>Mounting Point</code>/<code>Logical Volume</code>/<code>Physical Partition</code>/<code>Physical Volume</code>
+*** [http://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Lvm.svg/600px-Lvm.svg.png Relationship between various elements of the LVM (Wikipedia)]
+* [http://en.wikipedia.org/wiki/Disk_partitioning Disk Partitioning]
+* [http://en.wikipedia.org/wiki/Non-RAID_drive_architectures#JBOD JBOD]
+* [http://www.thegeekstuff.com/2011/10/linux-reboot-date-and-time/ How to View Linux System Reboot Date and Time]
+* [https://stackoverflow.com/questions/7665/how-to-resolve-symbolic-links-in-a-shell-script How to resolve symbolic links in a shell script] (Aug 11 '08)
+* [https://www.tecmint.com/set-limits-on-user-processes-using-ulimit-in-linux/ How to Set Limits on User Running Processes in Linux] (May 13, 2016)
+
+* [http://www.linuxnix.com/2011/12/umask-define-linuxunix.html What is UMASK and how to set UMASK in Linux/Unix?]
+* [http://www.cyberciti.biz/tips/linux-report-current-working-directory-of-process.html Find Out Current Working Directory Of A Process Running on Linux/Unix] (November 14, 2007)
+* [http://stackoverflow.com/questions/307503/whats-the-best-way-to-check-that-environment-variables-are-set-in-unix-shellscr What's the best way to check that environment variables are set in Unix shellscript](Nov 21 '08)
+* [http://unix.stackexchange.com/questions/119269/how-to-get-ip-address-using-shell-script How to get IP Address using shell script?](Mar 12 '14) : <code>realpath</code>
+
+* [http://linoxide.com/linux-how-to/few-command-helps-to-get-linux-hardware-details/ 6 Examples To Get Linux Hardware Details]
+* [http://www.cyberciti.biz/faq/linux-list-hardware-information/ Linux List Hardware Information Command]
+
+===User Management===
+
+* [http://www.cyberciti.biz/faq/howto-linux-add-user-to-group/ Howto: Linux Add User To Group]
+* [http://unix.stackexchange.com/questions/29570/how-do-i-remove-a-user-from-a-group How do I remove a user from a group?](Jan 20 '12)
+* [https://www.digitalocean.com/community/tutorials/how-to-create-a-sudo-user-on-centos-quickstart How To Create a Sudo User on CentOS] (March 29, 2016)
+* [http://unix.stackexchange.com/questions/29570/how-do-i-remove-a-user-from-a-group How do I remove a user from a group?] (Jan 20 '12) : <code>gpasswd</code>
+
+===Service Control===
+
+* [http://en.wikipedia.org/wiki/Init <code>init</code>]
+* [https://en.wikipedia.org/wiki/Systemd <code>systemd</code>] : ''provides a system and service manager that runs as PID 1 and starts the rest of the system''
+* [https://en.wikipedia.org/wiki/Upstart <code>Upstart</code>] : ''an event-based replacement for the /sbin/init daemon''
+* [https://en.wikipedia.org/wiki/Inetd <code>inetd</code>]
+* [http://en.wikipedia.org/wiki/Xinetd <code>xinetd</code>] : ''a secure replacement for <code>inetd</code>''
+
+* '''<code>init</code>'''
+** [https://www.centos.org/docs/5/html/5.1/Installation_Guide/s2-boot-init-shutdown-init.html The <code>/sbin/init</code> Program of CentOS 5]
+** [http://linuxconfig.org/how-to-check-a-current-runlevel-of-your-linux-system How to check a current runlevel of your Linux system]
+** [https://www.ghacks.net/2009/04/04/get-to-know-linux-the-etcinitd-directory/ Get To Know Linux: The <code>/etc/init.d</code> Directory] (April 4, 2009)
+*** <code>/etc/init.d/<i>command</i> start|stop|reload|restart</code>
+
+* '''<code>systemd</code>'''
+** [https://freedesktop.org/wiki/Software/systemd/ systemd]
+** [http://www.tecmint.com/systemd-replaces-init-in-linux/ The Story Behind ‘init’ and ‘systemd’: Why ‘init’ Needed to be Replaced with ‘systemd’ in Linux] (January 27, 2017)
+
+* '''<code>Upstart</code>'''
+** [http://upstart.ubuntu.com/ Upstart]
+** [http://upstart.ubuntu.com/cookbook/ Upstart Intro, Cookbook and Best Practises]
+
+* [https://www.centos.org/docs/5/html/5.2/Deployment_Guide/ch-services.html CentOS 6/Controlling Access to Services]
+* [https://access.redhat.com/site/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s2-services-chkconfig.html RHEL 6/Using the <code>chkconfig</code> Utility]
+
+===Job Control===
+
+* [http://web.mit.edu/gnu/doc/html/features_5.html Job Control]
+* [http://acms.ucsd.edu/info/jobctrl.html Job Control on UNIX systems]
+
+===Networking===
+
+* [http://tldp.org/HOWTO/TCP-Keepalive-HOWTO/ TCP Keepalive HOWTO] (2007-05-04)
+* [http://www.ehowstuff.com/configure-linux-tcp-keepalive-setting/ How to Configure Linux TCP keepalive Setting] (January 30, 2016)
+* [https://superuser.com/questions/240456/how-to-interpret-the-output-of-netstat-o-netstat-timers How to interpret the output of netstat -o / netstat --timers] (Feb 1 '11)
+** interpretation of "ESTABLISHED keepalive (8.23/0/3)"
+* [http://www.serverframework.com/asynchronousevents/2011/01/time-wait-and-its-design-implications-for-protocols-and-scalable-servers.html TIME_WAIT and its design implications for protocols and scalable client server systems] (January 21, 2011)
+* [https://serverfault.com/questions/212093/how-to-reduce-number-of-sockets-in-time-wait How to reduce number of sockets in TIME_WAIT?] (Dec 13 '10)
+* [http://www.cyberciti.biz/faq/linux-unix-bsd-is-ntp-client-working/ HowTo: Verify My NTP Working Or Not]
+* [http://www.linuxjournal.com/files/linuxjournal.com/linuxjournal/articles/023/2333/2333s2.html TCP listen() Backlog]
+* [https://stackoverflow.com/questions/36594400/what-is-backlog-in-tcp-connections What is “backlog” in TCP connections?] (Apr 13 '16)
+
+* [https://linux.die.net/man/7/ip <code>ip</code>]
+* [https://linux.die.net/man/7/tcp <code>tcp</code>]
+* [https://linux.die.net/man/7/udp <code>udp</code>]
+* [https://linux.die.net/man/7/socket <code>socket</code>]
+
+* [https://github.com/torvalds/linux/blob/v4.11/include/uapi/linux/in.h <code>linux/in.h</code>]
+* [https://github.com/torvalds/linux/blob/v4.11/include/uapi/linux/tcp.h <code>linux/tcp.h</code>]
+* [https://github.com/torvalds/linux/blob/v4.11/include/uapi/asm-generic/socket.h <code>asm-generic/socket.h</code>]
+
+===System Monitoring===
+
+* [https://www.suse.com/documentation/sles11/book_sle_tuning/data/cha_util.html SUSE System Monitoring Utilities]
+* [https://www.centos.org/docs/5/html/5.1/Deployment_Guide/s1-proc-topfiles.html CentOS / Top-level Files within the <code>proc</code> File System]
+* [http://www.binarytides.com/linux-command-check-memory-usage/ 5 commands to check memory usage on Linux]
+* [https://access.redhat.com/solutions/406773 Interpreting <code>/proc/meminfo</code> and free output for Red Hat Enterprise Linux 5, 6 and 7](May 27 2016)
+* [http://www.linuxatemyram.com/ '''Linux ate my RAM!''']
+* [http://www.binarytides.com/linux-command-check-memory-usage/ 5 commands to check memory usage on Linux]
+
+==Shell==
+
+* [http://steve-parker.org/sh/thompson.shtml Ken Thompson's original documentation for the Unix shell]
+* [http://steve-parker.org/sh/bourne.shtml This is an HTMLized version of Steve Bourne's original shell tutorial]
+* [http://en.wikipedia.org/wiki/Comparison_of_command_shells Comparison of command shells]
+
+* [https://en.wikipedia.org/wiki/Here_document Here document]
+** a file literal or input stream literal generally starting with <code><< EOM</code>
+* [http://stackoverflow.com/questions/352098/how-can-i-pretty-print-json How can I pretty-print JSON?]
+
+===Bash===
+
+* [http://www.gnu.org/software/bash/manual/bash.html Bash Reference Manual]
+** [http://www.gnu.org/software/bash/manual/bash.html#Shell-Expansions Shell Expansions]
+* [http://tldp.org/LDP/Bash-Beginners-Guide/html/index.html Bash Guide for Beginners]
+* [http://en.wikibooks.org/wiki/Bash_Shell_Scripting Bash Shell Scripting]
+* [http://ss64.com/bash/ An A-Z Index of the Bash command line for Linux]
+* [http://wiki.bash-hackers.org/start Bash Hackers Wiki Frontpage]
+* [https://google.github.io/styleguide/shell.xml Google's Shell Style Guide]
+
+* [https://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html Bash Startup Files]
+* [http://stefaanlippens.net/bashrc_and_others Bash: about .bashrc, .bash_profile, .profile, /etc/profile, etc/bash.bashrc and others]
+* [http://stefaanlippens.net/my_bashrc_aliases_profile_and_other_stuff My bashrc, bash aliases, profile and other files]
+* [http://www.tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_01.html Shell initialization files]
+* [https://help.ubuntu.com/community/EnvironmentVariables#System-wide_environment_variables System-wide environment variables]
+* [https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps How To Use Bash History Commands and Expansions on a Linux VPS]
+* [http://askubuntu.com/questions/474556/hiding-output-of-a-command Hiding output of a command] (May 30 '14)
+** <code><i>command</i> > /dev/null 2>&1</code>
+* [https://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in How do I reload .bashrc without logging out and back in?] (Mar 25 '10)
+** <code>source ~/.bashrc</code>, <code>. ~/.bashrc</code>, <code>source ~/.profile</code>
+
+* '''Bash programming'''
+** [http://stackoverflow.com/questions/8254120/how-to-escape-a-single-quote-in-single-quote-string-in-bash How to escape a single quote in single quote string in Bash?](Nov 24 '11)
+** [https://raymii.org/s/snippets/Bash_Bits_Debug_Logging.html Bash Bits: Debug Logging](15-09-2013)
+** [http://www.cyberciti.biz/faq/bash-for-loop-array/ '''Bash For Loop Array: Iterate Through Array Values'''](APRIL 13, 2008)
+** [http://wiki.bash-hackers.org/syntax/ccmd/classic_for The classic for-loop]
+** [http://stackoverflow.com/questions/9640660/any-way-to-exit-bash-script-but-not-quitting-the-terminal Any way to exit bash script, but not quitting the terminal] (Mar 9 '12)
+*** <code>return</code> instead of <code>exit</code>
+** [http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_02.html Variables]
+*** Global variables, Local variables, Exporting variables, Reserved variables, Special parameters
+** [https://stackoverflow.com/questions/1494178/how-to-define-hash-tables-in-bash How to define hash tables in Bash?] (Sep 29 '09)
+
+* '''Shell expansions'''
+** [https://www.gnu.org/software/bash/manual/bashref.html#Command-Substitution Command Substitution]
+*** <code>`echo $CODE` | base64`</code>
+** [http://www.gnu.org/software/bash/manual/bash.html#Bash-Conditional-Expressions Bash Conditional Expressions] (''<code>-f file, -d file, -eq, -ne, </code>''...)
+** [http://www.gnu.org/software/bash/manual/bash.html#Shell-Parameters Shell Parameters]
+** [https://www.gnu.org/software/bash/manual/bashref.html#Special-Parameters Special Parameters] : <code>$*, $@, $#, $?, $-, $$, $0, $!, $_</code>
+** [http://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion Shell Parameter Expansion]
+*** <code>${parameter:-word}, ${parameter:=word}, ${parameter:?word}, ${parameter:+word}, ${parameter##word}, ${parameter%%word}</code>, ...
+** [https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion Filename Expansion]
+*** Pattern syntax in file name expansion is different with general regex patterns.
+** [http://www.gnu.org/software/bash/manual/bash.html#Pattern-Matching Pattern Matching in Filename Expansion]
+** [https://www.gnu.org/software/bash/manual/bashref.html#History-Interaction History Expansion] : <code>!!, !-1, !!:$</code>
+*** [http://www.thegeekstuff.com/2008/08/15-examples-to-master-linux-command-line-history/ 15 Examples To Master Linux Command Line History] (AUGUST 11, 2008)
+** [https://unix.stackexchange.com/questions/122845/using-a-b-for-variable-assignment-in-scripts Using “${a:-b}” for variable assignment in scripts] (Apr 3 '14)
+
+* '''If statement'''
+** [http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_07_01.html '''Introduction to if''']
+*** <code>if [ -d /var/lib/httpd ], if [ ! -d /var/lib/httpd ], if [ -d /var/lib/httpd -a -d /var/log/httpd ]</code>
+** [https://en.wikibooks.org/wiki/Bash_Shell_Scripting#if_statements if statements]
+** [http://superuser.com/questions/195598/test-if-element-is-in-array-in-bash Test if element is in array in bash](Oct 4 '10)
+
+* '''getopts'''
+** [http://wiki.bash-hackers.org/howto/getopts_tutorial Small getopts tutorial]
+** [https://jonalmeida.com/posts/2013/05/26/different-ways-to-implement-flags-in-bash/ Different ways to implement flags in bash] (May 26, 2013)
+** [https://stackoverflow.com/questions/11279423/bash-getopts-with-multiple-and-mandatory-options bash getopts with multiple and mandatory options] (Jul 1 '12)
+
+==X11==
+
+* [https://en.wikipedia.org/wiki/X_Window_System X Window System] (on Wikipedia)
+* [https://en.wikipedia.org/wiki/X_window_manager X window manager] (on Wikipedia)
+* [https://en.wikipedia.org/wiki/Desktop_environment Desktop environment] (on Wikipedia)
+
+* [http://www.x.org/releases/X11R7.7/doc/ Documentation for the X Window System Version 11 Release 7.7 (X11R7.7)]
+* [http://xwinman.org/ Windows Managers for X]
+* [http://x.cygwin.com/docs/ug/cygwin-x-ug.html Cygwin/X User's Guide]
+* [http://x.cygwin.com/docs/faq/cygwin-x-faq.html Cygwin/X Frequently Asked Questions]
+
+* [http://x.cygwin.com/docs/ug/using-remote-session.html Login to remote sessions using XDMCP]
+* [http://osr507doc.sco.com/en/GECG/X_Disp_ProcAccessByHost.html Granting access to specific hosts for X server]
+* [http://askubuntu.com/questions/163155/how-do-i-access-my-remote-ubuntu-server-via-x-windows-from-my-mac How do I access my remote Ubuntu server via X-windows from my Mac?] (Jul 13 '12)
+
+* '''X11 forwarding'''
+** [http://the.earth.li/~sgtatham/putty/0.63/htmldoc/Chapter3.html#using-x-forwarding Using X11 forwarding in SSH]
+** [http://superuser.com/questions/119792/how-to-use-x11-forwarding-with-putty How to use X11 forwarding with PuTTY] (Mar 14 '10)
+** [https://x.cygwin.com/docs/ug/using-remote-apps.html Displaying remote clients] : <code>ssh</code> or <code>xhost</code>
+
+* [https://en.wikipedia.org/wiki/Comparison_of_X_Window_System_desktop_environments Comparison of X Window System desktop environments]
+
+===GNOME===
+
+* [http://library.gnome.org/admin/system-admin-guide/2.32/system-admin-guide.html GNOME Desktop System Administration Guide - 2.32.0]
+* [http://library.gnome.org/admin/gdm/2.32/ GNOME Display Manager Reference Manual - 2.32.1]
+
+* [https://developer.gnome.org/integration-guide/stable/desktop-files.html.en Desktop files: putting your application in the desktop menus]
+
+==Linux Distributions==
+
+* [https://en.wikipedia.org/wiki/List_of_Linux_distributions List of Linux distributions]
+* [https://en.wikipedia.org/wiki/Comparison_of_Linux_distributions Comparison of Linux distributions]
+
+===CentOS===
+
+* [http://en.wikipedia.org/wiki/CentOS#CentOS_releases CentOS releases]
+* [http://www.centos.org/docs/5/ CentOS-5 Documentation]
+
+* [http://www.youtube.com/watch?v=7pQIIQ-mY90 CentOS 6.5 Installation on VirtualBox](Jan 23, 2014)
+* [http://wiki.centos.org/HowTos/Virtualization/VirtualBox/CentOSguest#head-a0aa0ed2ffd3d99a27125c4a9ee0ec3d2cbf0e2c Installing Guest Additions]
+* [http://wiki.centos.org/AdditionalResources/Repositories Available Repositories for CentOS]
+* [http://linux-bsd-sharing.blogspot.kr/2012/04/tip-enable-bash-completion-on-centos-62.html Enable Bash completion on CentOS 6.2 / SL 6.2]
+* [https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-7 Initial Server Setup with CentOS 7] (July 21, 2014)
+* [https://www.centos.org/docs/5/html/5.1/Installation_Guide/s2-boot-init-shutdown-init.html  The <code>/sbin/init</code> Program]
+** [https://www.centos.org/docs/5/html/5.1/Installation_Guide/s1-boot-init-shutdown-run-boot.html Running Additional Programs at Boot Time] : <code>/etc/rc.d/rc.local</code>
+
+* [http://subversion.apache.org/packages.html#centos Installing Subversion on CentOS]
+* [http://maven.apache.org/download.cgi#Unix-based_Operating_Systems_Linux_Solaris_and_Mac_OS_X Installing Maven on CentOS]
+* [https://github.com/nodesource/distributions#enterprise-linux-based-distributions Installing Node.js on CentOS]
+* [http://chrome.richardlloyd.org.uk/ How to install Google Chrome 28+ on RHEL/CentOS 6 or 7]
+* [https://www.cyberciti.biz/faq/centos-ssh/ CentOS SSH Installation And Configuration] (MARCH 14, 2009)
+* [https://www.cyberciti.biz/faq/how-to-installing-and-using-ssh-client-server-in-linux/ HowTo: Install ssh In Linux] (APRIL 20, 2012)
+
+====Utilities====
+
+=====<code>journalctl</code>=====
+
+* [https://www.digitalocean.com/community/tutorials/how-to-use-journalctl-to-view-and-manipulate-systemd-logs  How To Use Journalctl to View and Manipulate Systemd Logs] (February 5, 2015)
+* [https://www.unixmen.com/logging-journald-rhel7centos7/ Logging With Journald In RHEL7/CentOS7]
+
+===Ubuntu===
+
+* [https://help.ubuntu.com/ Official Ubuntu Documentation]
+* [https://help.ubuntu.com/14.04/serverguide/index.html Ubuntu 14.04 Server Documentation]
+* [https://help.ubuntu.com/14.04/ubuntu-help/index.html Ubuntu 14.04 Desktop Documentation]
+
+* [http://ask.xmodulo.com/install-minimal-ubuntu-desktop.html How to install minimal Ubuntu desktop] (November 11, 2013)
+* [https://ubuntuforums.org/showthread.php?t=1484530 open a GUI window using terminal] (May 16th, 2010)
+* [http://askubuntu.com/questions/419610/permission-of-a-desktop-file Permission of a <code>.desktop</code> file] (Feb 11 '14)
+* [https://help.ubuntu.com/community/EnvironmentVariables#System-wide_environment_variables System-wide environment variables] : <code>/etc/environment</code>, <code>/etc/profile.d/*.sh</code>
+* [https://help.ubuntu.com/community/EnvironmentVariables#Session-wide_environment_variables Session-wide environment variables] : <code>~/.profile</code>
+
+* [https://www.digitalocean.com/community/tutorials/how-to-install-java-on-ubuntu-with-apt-get How To Install Java on Ubuntu with Apt-Get] (February 13, 2014)
+* [http://ubuntuhandbook.org/index.php/2016/01/how-to-install-the-latest-eclipse-in-ubuntu-16-04-15-10/ How to Install The Latest Eclipse in Ubuntu 16.04, 15.10] (January 13, 2016)
+* [https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions Installing Node.js via package manager - Debian and Ubuntu based Linux distributions]
+* [https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server How To Install Node.js on an Ubuntu 14.04 server] (May 12, 2014)
+* [https://github.com/golang/go/wiki/Ubuntu Insalling golang on Ubuntu]
+* [https://docs.docker.com/engine/installation/linux/ubuntu/ Get Docker for Ubuntu]
+* [https://askubuntu.com/questions/40779/how-do-i-install-a-deb-file-via-the-command-line How do I install a .deb file via the command line?] (May 6 '11)
+* [https://askubuntu.com/questions/431911/how-can-i-verify-the-speed-of-my-nic-in-ubuntu How can I verify the speed of my NIC in ubuntu?] (Mar 9 '14)
+* [https://codingweb.lj.studio/ubuntu-16-increase-maximum-file-open-limit-ulimit-n/ Ubuntu 16 – how to increase maximum file open limit ( ulimit -n )] (2016-08-30)
+
+====Repositories====
+
+* [https://help.ubuntu.com/community/Repositories/Ubuntu Repositories/Ubuntu]
+* [http://packages.ubuntu.com/ Ubuntu Packages Search]
+* [https://launchpad.net/ubuntu/+ppas PPA(Personal Package Archives) for Ubuntu]
+** a software repository for uploading source packages to be built and published as an APT repository by Launchpad
+
+====Commands====
+
+* [http://manpages.ubuntu.com/manpages/xenial/man8/apt-get.8.html <code>apt-get</code>]
+** [http://www.tecmint.com/useful-basic-commands-of-apt-get-and-apt-cache-for-package-management/ 25 Useful Basic Commands of APT-GET and APT-CACHE for Package Management] (March 13, 2013)
+* [http://manpages.ubuntu.com/manpages/xenial/man8/apt-cache.8.html <code>apt-cache</code>]
+* [http://manpages.ubuntu.com/manpages/xenial/en/man1/apt-file.1.html <code>apt-file</code>] : searching files in packages for the APT package management system.
+* [http://manpages.ubuntu.com/manpages/xenial/man8/apt.8.html <code>apt</code>]
+** provides a high-level commandline interface for the package management system.
+** cann't be used inside script file.
+* [http://manpages.ubuntu.com/manpages/xenial/man7/tcp.7.html <code>tcp</code>]
+**  <code>/proc/sys/net/ipv4/</code>
+
+===Fedora===
+
+* [http://docs.fedoraproject.org/en-US/index.html Fedora Documentation]
+* [http://docs.fedoraproject.org/en-US/Fedora/17/html/System_Administrators_Guide/ch-Services_and_Daemons.html Services and Daemons of Fedora 17]
+* [http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/index.html Fedora RPM Guide]
+
+* Storage
+** [http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/ch-partitions-x86.html#s2-partitions-mt-points-x86 Disk Partitions and Mount Points]
+** [http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/s2-diskpartrecommend-x86.html Recommended Partitioning Scheme]
+** [http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/ch-partitions-x86.html#s2-partitions-part-name-x86 Partition Naming Scheme]
+** [http://docs.fedoraproject.org/en-US/Fedora/20/html/Installation_Guide/sn-partitioning-lvm.html Understanding LVM]
+
+* [https://fedoraproject.org/wiki/Red_Hat_Enterprise_Linux?rd=RHEL#History Fedora and Red Hat Enterprise Linux]
+
+===Red Hat Enterprise Linux===
+
+* [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/ RHEL Documentation Home]
+* RHEL 6
+** [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html Installation Guide]
+** [https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s2-diskpartrecommend-x86.html Recommended Partitioning Scheme]
+
+==UNIX Systems==
+
+===AIX===
+* [https://www.ibm.com/developerworks/wikis/display/WikiPtype/Virtualization+Concepts Virtualization Concepts]
+* [http://www-03.ibm.com/systems/power/software/aix/linux/ AIX Toolbox for Linux Applications]
+
+====AIX Commands====
+
+* [http://pic.dhe.ibm.com/infocenter/aix/v7r1/topic/com.ibm.aix.cmds/doc/aixcmds4/oslevel.htm oslevel]
+** Reports the latest installed level (technology level, maintenance level and service pack) of the system.
+* [http://pic.dhe.ibm.com/infocenter/aix/v7r1/topic/com.ibm.aix.cmds/doc/aixcmds3/lsdev.htm lsdev]
+** Displays devices in the system and their characteristics.
+* [http://pic.dhe.ibm.com/infocenter/aix/v7r1/topic/com.ibm.aix.cmds/doc/aixcmds4/prtconf.htm prtconf]
+** Displays system configuration information.
+* [http://pic.dhe.ibm.com/infocenter/aix/v7r1/topic/com.ibm.aix.cmds/doc/aixcmds3/lparstat.htm lparstat]
+** Reports logical partition (LPAR) related information and statistics.
+* [http://pic.dhe.ibm.com/infocenter/aix/v7r1/topic/com.ibm.aix.cmds/doc/aixcmds4/no.htm no]
+** Manages network tuning parameters.
+
+===Solaris===
+
+* [http://stackoverflow.com/questions/4892516/getting-around-truncated-ps solaris - Getting around truncated “ps]
+
+== Commands/Utilities ==
+
+* [https://en.wikipedia.org/wiki/List_of_Unix_commands List of Unix commands]
+
+===Common===
+
+{| class="wikitable" style='margin-left:20px'
+! Command
+! Description
+! Readings
+|-
+| '''<code>find</code>''' || find files
+| [http://pubs.opengroup.org/onlinepubs/9699919799/utilities/find.html POSIX.1-2008/Utilities/<code>find</code>]
+|-
+| '''<code>id</code>''' || return user identity
+| http://en.wikipedia.org/wiki/Id_(Unix)
+|-
+| '''<code>source</code>''' || read and execute ex commands from file
+| [http://pubs.opengroup.org/onlinepubs/9699919799/utilities/ex.html#tag_20_40_13_39 POSIX.1-2008/Utilities/<code>ex/source</code>]
+|-
+| '''<code>.</code>''' || evaluates commands in a computer file in the current execution context
+| [https://en.wikipedia.org/wiki/Dot_(command)]
+|-
+| '''<code>sudo</code>''' || allows users to run programs with the security privileges of another user (normally the superuser, or root)
+| http://en.wikipedia.org/wiki/Sudo
+|-
+| '''<code>wc</code>''' || word, line, and byte or character count
+| [http://pubs.opengroup.org/onlinepubs/9699919799/utilities/wc.html POSIX.1-2008/Utilities/<code>wc</code>]
+|-
+| '''<code>grep</code>''' || search a file for a pattern
+| [http://pubs.opengroup.org/onlinepubs/9699919799/utilities/grep.html POSIX.1-2008/Utilities/<code>grep</code>]
+|-
+| '''<code>tee</code>''' || reads standard input and writes it to both standard output and one or more files, effectively duplicating its input.
+| [https://en.wikipedia.org/wiki/Tee_(command) <code>tee</code>]
+|-
+| '''<code>curl </code>''' || command line tool and library for transferring data with URLs
+| [https://curl.haxx.se/docs/manual.html Manual]<br/>[https://curl.haxx.se/docs/manpage.html man page]
+|-
+| '''<code>wget</code>''' || non-interactive download of files from the Web
+| [http://www.gnu.org/software/wget/manual/html_node/ GNU Wget Manual]
+|}
+
+* [http://stackoverflow.com/questions/12443689/maxdepth-option-after-a-non-option-and-find-paths-must-precede-expression -maxdepth option after a non-option AND find: paths must precede expression](Sep 16 '12)
+* [http://stackoverflow.com/questions/10889072/using-sudo-with-for-l Using sudo with for loop] (Jun 4 '12)
+* [https://daniel.haxx.se/docs/curl-vs-wget.html <code>curl</code> vs <code>wget</code>]
+
+====<code>su</code>====
+
+* [https://www.cyberciti.biz/open-source/command-line-hacks/linux-run-command-as-different-user/ Linux Run Command As Another User] (JULY 20, 2012)
+* [http://unix.stackexchange.com/questions/222602/bash-cannot-act-as-nobody-and-nogroup Bash cannot act as nobody and nogroup?] (Aug 11 '15) : <code>su -s /bin/bash nobody '-c echo Hi'</code> for account with <code>/sbin/nologin</code>
+
+====<code>sudo</code>====
+
+* [https://www.sudo.ws/man/1.8.20/sudo.man.html sudo 1.8.20 manual]
+* [http://stackoverflow.com/questions/5560442/how-to-run-two-commands-in-sudo how to run two commands in sudo?] (Apr 6 '11)
+
+====<code>tee</code>====
+
+* [https://en.wikipedia.org/wiki/Tee_(command) <code>tee</code>]
+* [http://pubs.opengroup.org/onlinepubs/9699919799/utilities/tee.html POSIX.1-2008/Utilities/<code>tee</code>]
+
+====<code>curl</code>====
+
+* [https://curl.haxx.se/docs/manual.html Manual]
+* [https://curl.haxx.se/docs/manpage.html man page]
+* [https://curl.haxx.se/docs/httpscripting.html Using curl to automate HTTP jobs]
+* [https://news.ycombinator.com/item?id=7596375 <code>curl</code> with heredoc]
+* [https://coderwall.com/p/taqiyg/use-http-status-codes-from-curl Use HTTP status codes from curl](December 19, 2016)
+** <code>curl -s -o /dev/null -w '%{http_code}' <nowiki>http://www.google.com/</nowiki></code>
+
+===Editing===
+
+====<code>sed</code>====
+
+* [http://en.wikipedia.org/wiki/Sed sed at Wikipedia]
+* [http://www.grymoire.com/Unix/Sed.html '''Sed - An Introduction and Tutorial by Bruce Barnett''']
+* [http://www.gnu.org/software/sed/manual/sed.html GNU <code>sed</code> Manual]
+* [http://pubs.opengroup.org/onlinepubs/9699919799/utilities/sed.html POSIX.1-2008/Utilities/<code>sed</code>]
+* [http://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap09.html POSIX.1-2008 Regular Expressions]
+
+* [http://stackoverflow.com/questions/339483/how-can-i-remove-the-first-line-of-a-text-file-using-bash-sed-script How can I remove the first line of a text file using bash/sed script?] (Dec 4 '08)
+* [http://unix.stackexchange.com/questions/96226/delete-first-line-of-a-file Delete First line of a file](Oct 16 '13)
+* [http://www.yourownlinux.com/2015/04/sed-command-in-linux-append-and-insert-lines-to-file.html SED COMMAND IN LINUX - APPEND AND INSERT LINES TO A FILE](APRIL 19, 2015)
+* [http://stackoverflow.com/questions/2613800/how-to-convert-dos-windows-newline-crlf-to-unix-newline-n-in-bash-script How to convert DOS/Windows newline (CRLF) to Unix newline (\n) in bash script?](Apr 10 '10)
+** <code># sed -i 's/\r$//g' filename</code>
+* [http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/ Unix Sed Tutorial: Append, Insert, Replace, and Count File Lines] (NOVEMBER 9, 2009)
+
+====<code>awk</code>====
+
+* [http://www.grymoire.com/Unix/Awk.html Awk - A Tutorial and Introduction]
+* [https://en.wikipedia.org/wiki/AWK awk at Wikipedia]
+
+===Administration===
+
+====<code>useradd</code>====
+
+* [https://linux.die.net/man/8/useradd <code>useradd</code> Man Page]
+* [http://www.tecmint.com/add-users-in-linux/ The Complete Guide to “useradd” Command in Linux – 15 Practical Examples] (March 28, 2014)
+
+====clusterssh====
+
+* https://github.com/duncs/clusterssh
+* Desc. : cluster administration tool
+
+* Readings
+** [https://unix.stackexchange.com/questions/19008/automatically-run-commands-over-ssh-on-many-servers Automatically run commands over SSH on many servers] (Aug 19 '11)
+
+====parallel====
+
+* http://www.gnu.org/software/parallel/
+* Desc. :  shell tool for executing jobs in parallel using one or more computers
+
+===Monitoring &amp; Diagnosis===
+
+* [https://sysdig.com/blog/linux-troubleshooting-cheatsheet/ Linux Troubleshooting Cheatsheet: strace, htop, lsof, tcpdump, iftop & sysdig] (April 13, 2016)
+
+{| class="wikitable" style='margin-left:20px'
+! Command
+! Description
+! Misc
+|-
+| '''<code>top</code>''' ||
+|
+|-
+| '''<code>netstat</code>''' ||
+|
+|-
+| '''<code>lsof</code>''' || displays information about files open to Unix processes
+|
+|-
+| '''<code>strace</code>''' ||
+|
+|-
+| '''<code>tcpdump</code>''' ||
+|
+|-
+| '''<code>sysctl</code>''' || a tool for examining and changing kernel parameters at runtime
+|
+|}
+
+====<code>top</code>====
+
+* [https://linux.die.net/man/1/top top man page]
+
+====<code>lsof</code>====
+
+* [https://people.freebsd.org/~abe/ <code>lsof</code> homepage]
+** ''The free, open-source, Unix administrative tool lsof (for LiSt Open Files) displays information about files open to Unix processes.''
+* [https://en.wikipedia.org/wiki/Lsof <code>lsof</code> on Wikipedia]
+* [http://manpages.ubuntu.com/manpages/xenial/man8/lsof.8.html <code>lsof</code> in Ubuntu]
+
+* [https://gist.github.com/tonyc/1384523 Using strace and lsof to debug blocked processes]
+* [http://www.myhowto.org/solving-problems/7-exploring-system-internals-with-lsof-and-strace/ Exploring System Internals with lsof and strace] (20 July 2007)
+* [http://www.dedoimedo.com/computers/lsof.html Linux super-duper admin tools: lsof] (May 12, 2010)
+
+====<code>strace</code>====
+
+* [https://strace.io/ <code>strace</code> homepage]
+* [https://en.wikipedia.org/wiki/Strace <code>strace</code> on Wikipedia]
+
+* [http://adminlogs.info/2012/05/05/strace-third-eye-of-a-system-admin/ STrace : Third Eye of a System Admin] (May 5, 2012)
+* [https://askubuntu.com/questions/143561/why-wont-strace-gdb-attach-to-a-process-even-though-im-root Why won't strace/gdb attach to a process even though I'm root?] (May 29 '12)
+* [https://linux-tips.com/t/strace-attach-problem/99 Strace attach problem] (Mar 4, '15)
+* [https://unix.stackexchange.com/questions/220709/gdb-attach-permission-question-ptrace-scope-is-read-only '''gdb attach permission question (ptrace_scope is read-only)'''] (Aug 7 '15)
+** ''In docker you can now use the --privileged option''
+* [https://superuser.com/questions/348738/continuously-monitor-files-opened-accessed-by-a-process Continuously monitor files opened/accessed by a process] (Oct 20 '11)
+
+====<code>netstat</code>====
+
+* [https://en.wikipedia.org/wiki/Netstat <code>netstat</code> on Wikipedia]
+
+* [https://superuser.com/questions/240456/how-to-interpret-the-output-of-netstat-o-netstat-timers How to interpret the output of netstat -o / netstat --timers] (Feb 1 '11)
+
+====<code>tcpdump</code>====
+
+* [http://www.tcpdump.org/ <code>tcpdump</code> homepage] : a powerful command-line packet analyzer
+* [https://en.wikipedia.org/wiki/Tcpdump <code>tcpdump</code> on Wikipedia]
+
+* [https://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/ 12 Tcpdump Commands – A Network Sniffer Tool] (September 13, 2012)
+* [https://support.rackspace.com/how-to/capturing-packets-with-tcpdump/ Capture Packets with Tcpdump] (2013-04-25)
+* [https://texnoblog.wordpress.com/2010/04/17/using-tcpdump/ Using tcpdump to see HTTP requests and responses] (17 April, 2010)
+* [https://stackoverflow.com/questions/9874093/how-to-filter-tcpdump-output-based-on-packet-length How to filter tcpdump output based on packet length] (Mar 26 '12)
+** <code>tcpdump -n -i eth0 -A -x dst port 443 and greater 100</code>
+
+* [https://linux.die.net/man/7/pcap-filter <code>pcap-filter</code> man page] : explains filter expressions
+
+====<code>sysctl</code>====
+
+* [https://en.wikipedia.org/wiki/Sysctl <code>sysctl</code> on Wikipedia]
+* [https://wiki.archlinux.org/index.php/sysctl <code>sysctl</code>]
+
+===Networking===
+
+* [https://dougvitale.wordpress.com/2011/12/21/deprecated-linux-networking-commands-and-their-replacements/ Deprecated Linux networking commands and their replacements]
+** <code>arp, ifconfig, iptunnel, iwconfig, nameif, netstat, route</code> -> <cod>ip, ss</code>
+
+====<code>traceroute</code>====
+
+* [https://linux.die.net/man/8/traceroute <code>traceroute</code> man page]
+* [https://en.wikipedia.org/wiki/Traceroute traceroute] (on Wikipedia)
+* [https://serverfault.com/questions/334029/what-does-mean-when-traceroute what does “***” mean when traceroute](Nov 23 '11)
+* [http://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-software-releases-121-mainline/12778-ping-traceroute.html Understanding the Ping and Traceroute Commands] (November 29, 2006)
+* [http://www.thegeekstuff.com/2012/05/traceroute-examples 5 UNIX / Linux Traceroute Command Examples] (MAY 9, 2012)
+
+====<code>iptables</code>====
+
+* [https://en.wikipedia.org/wiki/Iptables <code>iptables</code> on Wikipedia]
+** ''allows a system administrator to configure the tables[2] provided by the Linux kernel firewall (implemented as different Netfilter modules) and the chains and rules it stores.''
+* [https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands Iptables Essentials: Common Firewall Rules and Commands] (August 10, 2015)
+* [https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules How To List and Delete Iptables Firewall Rules] (August 14, 2015)
+
+====<code>conntrack</code>====
+
+* [http://conntrack-tools.netfilter.org/ conntrack-tools homepage]
+** a set of free software userspace tools for Linux that allow system administrators interact with the Connection Tracking System, which is the module that provides stateful packet inspection for iptables.
+* [http://conntrack-tools.netfilter.org/manual.html The conntrack-tools user manual]
+* [https://terry.im/wiki/terry/Netfilter%2Bconntrack-tools.html Netfilter's conntrack-tools]
+
+===misc===
+
+====<code>watch</code>====
+
+* [https://en.wikipedia.org/wiki/Watch_(Unix) <code>watch</code> on Wikipedia]
+* [http://www.linfo.org/watch.html The watch Command]
+
+====<code>screen</code>====
+
+* [https://en.wikipedia.org/wiki/GNU_Screen GNU Screen]
+* [https://www.gnu.org/software/screen/manual/screen.html Screen User's Manual]
+
+== Tips ==
+
+===At 1st Login===
+
+====Identifying System Configuration====
+
+=====IBM AIX=====
+* [http://pic.dhe.ibm.com/infocenter/aix/v6r1/topic/com.ibm.aix.cmds/doc/aixcmds4/prtconf.htm prtconf Command] : displays system configuration information.
+
+====Identifying the product of Linux installed====
+
+For Linux, '''<code>/etc/issues</code>''' file contains more detailed information on what Linux product it is.
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ cat /etc/issue
+Red Hat Enterprise Linux Server release 5.5 (Tikanga)
+Kernel \r on an \m
+</syntaxhighlight>
+
+====Identifying kernel parameters====
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ sysctl -a | more
+</syntaxhighlight>
+
+====Identifying the memory capacity and usage====
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ cat /proc/meminfo
+MemTotal:        3922904 kB
+MemFree:         3037280 kB
+...
+</syntaxhighlight>
+
+====Identifying the disk capacity and usage====
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ df
+...
+</syntaxhighlight>
+
+====Identifying TCP/IP ports currently in use.====
+You can identify TCP/IP ports currently in use using '''<code>netstat</code>''' command. The options of '''<code>netstat</code>''' is slightly different among operating systems.
+
+For UNIX,
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ netstat -na
+</syntaxhighlight>
+
+For Linux,
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ netstat -nap
+</syntaxhighlight>
+
+You need root privilege to take effect of '''<code>-p</code>''' option
+To find out whether a given port is being used or not, use <code>grep</code> command.
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ netstat -nap | grep -E '(^Proto)|(8080)'
+</syntaxhighlight>
+
+For Windows,
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ netstat -nao
+</syntaxhighlight>
+
+For more about '''<code>netstat</code>''', refer [http://en.wikipedia.org/wiki/Netstat topics in Wikipedia].
+
+====Identifying the shell of your current login====
+To identify what shell a user is set to use by default, you can check '''<code>SHELL</code>''' variable.
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ echo $SHELL
+/bin/bash
+$ bin/ksh
+$ echo $SHELL
+/bin/bash
+</syntaxhighlight>
+
+As the above example shows, '''<code>SHELL</code>''' variable contains the login default shell type not the one currently in use.
+
+====Readings====
+
+* [http://www.cyberciti.biz/faq/linux-check-memory-usage/ Linux Check Memory Usage]
+
+===Shell Commands===
+
+====Hiding the output of command====
+
+To hide both the normal output and error output, redirect <code>stdout</code> and <code>stderr</code> to null device
+
+<syntaxhighlight lang="bash" enclose='div'>
+% npm ls -g json >/dev/null 2>&1
+% #or
+# npm ls -g y18n &>/dev/null
+</syntaxhighlight>
+
+To hide only the error output, redirect <code>stderr</code> to null device
+
+<syntaxhighlight lang="bash" enclose='div'>
+% npm ls -g json 2>/dev/null
+</syntaxhighlight>
+
+* [http://askubuntu.com/questions/474556/hiding-output-of-a-command Hiding output of a command] (May 30 '14)
+
+====Listing files using <code>find</code> command excluding files with <code>'Permission denied'</code>====
+
+When executing '''<code>find</code>''' command in simplest format, you may get lots of lines just saying that <code>'Permission denied'</code>. Most cases, those are not what you want, and lots of permission denied lines can disturb you identifying the wanted result.
+
+You can use '''<code>stderr</code>''' redirection to cut out permission denied files (or directories).
+
+<syntaxhighlight lang="bash" enclose='div'>
+% find / -name '*.jar' 2>/dev/null
+</syntaxhighlight>
+
+* [http://stackoverflow.com/questions/762348/how-can-i-exclude-all-permission-denied-messages-from-find How can I exclude all “permission denied”-messages from “find .”?] (from stackoverflow)
+* [http://en.wikipedia.org/wiki/Redirection_(computing) Redirection on Wikipedia]
+
+====Finding files having specified name with full path====
+If you want to find files with extension of 'jar' and print them with full path, use find command with '''<code>-exec</code>''' operator like the following.
+
+<syntaxhighlight lang="bash" enclose='div'>
+% find . -name '*.jar' -exec ls -l {} \;
+</syntaxhighlight>
+
+For more about '''<code>find</code>''' command and '''<code>-exec</code>''' operator including strange '{}' or '\;' in the above example, refer the followings.
+* http://www.opengroup.org/onlinepubs/9699919799/utilities/find.html
+* http://docstore.mik.ua/orelly/unix3/upt/ch09_01.htm
+
+====Finding files containing the specified word====
+
+<syntaxhighlight lang="bash" enclose='div'>
+% find /home |xargs grep "password"
+</syntaxhighlight>
+
+For more about <code>'''xargs'''</code>, refer the followings.
+
+* [http://en.wikipedia.org/wiki/Xargs <code>'''xargs'''</code> from Wikipedia]
+
+====Finding large files====
+To find large files(not directories) under current directory and list them in pages, use the following command.
+
+<syntaxhighlight lang="bash" enclose='div'>
+% find . -type f -exec du -k {} 2>/dev/null \; | sort -nr | more
+</syntaxhighlight>
+
+To filter out small files, you can use '''<code>size</code>''' option with '''<code>find</code>''' command, or to filter out some subdirectories you can redirect the result to '''<code>grep</code>''' command.
+The following command will list files whose size are more than 1 mega-byte under current directory recursively except the subdirectories starting with 'svn' in order of their size.
+
+<syntaxhighlight lang="bash" enclose='div'>
+% find . -type f -size +1000000c -exec du -k {} 2>/dev/null \; | sort -nr | grep -E "\./svn.*" -v
+</syntaxhighlight>
+
+====Listing distinct file extensions of all files under a directory====
+
+<syntaxhighlight lang="bash" enclose='div'>
+% find . -type f -name "*.*" | sed -r 's/^.+(\.\w+)$/\1/' | sort | uniq
+</syntaxhighlight>
+
+====Counting files under a directory recurssively====
+
+<syntaxhighlight lang="bash" enclose='div'>
+% find . -type f -print | wc -l
+</syntaxhighlight>
+
+====Counting files in a tar file====
+
+<syntaxhighlight lang="bash" enclose='div'>
+% tar -tvf archive.tar | grep "^-.*" | wc -l
+</syntaxhighlight>
+
+====Inverse matching with <code>grep</code> command====
+To find lines not matching the specified patterns in a file, you can use '''<code>-v</code>''' option with '''<code>grep</code>''' command.
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ svn list -R http://.../repos1 | grep -v -E '(.*java|.*/)'
+</syntaxhighlight>
+
+You don't need to be bothered to find out how to use complex negative patterns with regex.
+
+====Viewing files in octal or hexadecimal format - <code>od</code>====
+You can view non ascii base files in hexadecimal format using '''<code>od</code>''' command.
+
+<syntaxhighlight lang="bash" enclose='div'>
+% od -A d -x journal.log
+</syntaxhighlight>
+
+For more about '''<code>od</code>''', refer the following.
+
+* http://www.opengroup.org/onlinepubs/9699919799/utilities/od.html
+* http://publib.boulder.ibm.com/infocenter/pseries/v5r3/index.jsp?topic=/com.ibm.aix.cmds/doc/aixcmds4/od.htm
+
+====Viewing file contents without line wrapping - <code>less -S</code>====
+
+<syntaxhighlight lang="bash" enclose='div'>
+% less -S known_hosts
+</syntaxhighlight>
+
+====Viewing the result of <code>ps</code> command without line wrapping====
+
+You can redirect the result to <code>cat</code> or <code>less</code> command, or use <code>ww</code> flag.
+
+<syntaxhighlight lang="bash" enclose='div'>
+% ps auxf | cat
+...
+% ps auxfww
+...
+% ps auxf | less -+S
+</syntaxhighlight>
+
+====Viewing file contents without comments lines (starting with <code>#</code>)====
+
+<syntaxhighlight lang="bash" enclose='div'>
+% cat /etc/apt/sources.list | grep -P '^[^#].*'
+</syntaxhighlight>
+
+====Sorting the file system usage result from the <code>du</code> command====
+
+You can sort the output of '''<code>du</code>''' command applying pipe to '''<code>sort</code>''' command.
+
+<syntaxhighlight lang="bash" enclose='div'>
+% du -m | sort -n
+</syntaxhighlight>
+
+For more about '''<code>du</code>''' and '''<code>sort</code>''', read the followings.
+
+* [http://www.opengroup.org/onlinepubs/9699919799/utilities/du.html du - estimate file space usage]
+* [http://www.opengroup.org/onlinepubs/9699919799/utilities/sort.html sort - sort, merge, or sequence check text files]
+
+====Getting multiple files form the target URL using <code>wget</code> command====
+
+'''<code>wget</code>''' provide '''<code>--accept</code>''' or '''<code>-A</code>''' switch which can represent multiple files using '''comma separated list''', '''wild card''', or '''character class'''.  But it's not that <code>-A</code> switch support regular expression.
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ su - hdfs -c "(cd ~; wget -x -P samples/flight/rawdata -A '198[7-9].csv.bz2' http://stat-computing.org/dataexpo/2009/)"
+$ su - hdfs -c "(cd ~; wget -x -P samples/flight/rawdata -A '199[0-9].csv.bz2' http://stat-computing.org/dataexpo/2009/)"
+$ su - hdfs -c "(cd ~; wget -x -P samples/flight/rawdata -A '200[0-8].csv.bz2' http://stat-computing.org/dataexpo/2009/)"
+$ su - hdfs -c "(cd ~; wget -x -P samples/flight/rawdata -A 'airports.csv, carriers.csv, plane-data.csv' http://stat-computing.org/dataexpo/2009/)"
+</syntaxhighlight>
+
+For more, refer the following
+
+* [http://www.gnu.org/software/wget/manual/html_node/Types-of-Files.html <code>wget</code> manual/Type of Filters]
+
+====Capturing incoming HTTP request using <code>tcpdump</code>====
+
+<syntaxhighlight lang="bash" enclose='div'>
+sudo tcpdump -s 0 -A -i eth1 dst port 80
+</syntaxhighlight>
+
+===Bash Programming===
+
+====2 dimentional array====
+
+<syntaxhighlight lang="bash" enclose='div'>
+
+declare -a m
+m[0]='a b c d'
+m[1]='e f g h'
+m[2]='i j k l'
+m[3]='m n o p'
+m[4]='q r s t'
+
+for r in "${m[@]}"; do
+  echo $r
+  for c in $r; do
+    echo $c
+  done
+done
+</syntaxhighlight>
+
+===Managing Packages===
+
+====Ubuntu====
+
+=====Installing a new software package=====
+
+# Update the package information
+# Search the software package
+# Install or upgrade the software package
+# Confirm the installation of the software package
+# (Optionally) Confirm all the files installed by the package
+
+Using <code>apt</code>
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ sudo apt update   # update
+...
+$ sudo apt list *golang-1.8* -a   # search
+...
+$ sudo apt install golang-1.8   # upgrade
+...
+$ sudo apt show golang-1.8   # confirm
+...
+$ sudo apt-file list golang-1.8 # confirm all the files installed
+</syntaxhighlight>
+
+Not using <code>apt</code>
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ sudo apt-get update   # update
+...
+$ sudo apt-cache search golang-1.8  # search
+...
+$ sudo apt-get install golang-1.8   # upgrade
+...
+$ sudo apt-cache show golang-1.8 # confirm
+
+...
+$ sudo apt-file list golang-1.8 # confirm all the files installed
+</syntaxhighlight>
+
+* References
+** [http://manpages.ubuntu.com/manpages/xenial/man8/apt-get.8.html <code>apt-get</code>]
+** [http://manpages.ubuntu.com/manpages/xenial/man8/apt-cache.8.html <code>apt-cache</code>]
+** [http://manpages.ubuntu.com/manpages/xenial/en/man1/apt-file.1.html <code>apt-file</code>] : searching files in packages for the APT package management system.
+** [http://manpages.ubuntu.com/manpages/xenial/man8/apt.8.html <code>apt</code>] : provides a high-level commandline interface for the package management system.
+
+=====Installing a software package specifying version with wildcard=====
+
+<syntaxhighlight lang='bash' enclose='div'>
+$ sudo apt-get install nodejs=6.10.2*
+</syntaxhighlight>
+
+=====Listing all installed packages=====
+
+<syntaxhighlight lang="bash" enclose='div'>
+$ sudo apt list --installed
+</syntaxhighlight>
+
+
+
+
+</div>
