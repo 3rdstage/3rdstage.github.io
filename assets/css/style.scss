@@ -11,5 +11,5 @@ div.wrapper {
 
 div.wrapper h2:before{
   content:counter(level-1-no) ". ";
-  counter-increment:step-for-sec;
+  counter-increment:level-1-no;
 }
