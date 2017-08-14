@@ -613,7 +613,7 @@ abstract class FormatCache<F extends Format> {
 
 -   Case 1 : **The type parameter is used only for method parameters, not for return type.**
 
-<T extends Object> is definitely different from &lt;?&gt;. The former means some fixed type, but the latter means unfixed type. In other words, with &lt;?&gt; the type can vary among executions.
+&lt;T extends Object&gt; is definitely different from &lt;?&gt;. The former means some fixed type, but the latter means unfixed type. In other words, with &lt;?&gt; the type can vary among executions.
 
 ``` java
 public static <T> PropertyMeta<?> getPropertyMeta(
