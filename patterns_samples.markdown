@@ -28,176 +28,7 @@ echo JAVA_HOME = %JAVA_HOME%
 if exist "%JAVA_HOME%\release" (
   for /F "tokens=2 delims==" %%x in ('findstr "JAVA_VERSION" "%JAVA_HOME%\release"') do set JAVA_VERSION=%%~x
   for /F "tokens=2 delims==" %%x in ('findstr "OS_ARCH" "%JAVA_HOME%\release"') do set OS_ARCH=%%~x
-  
-  echo JAVA_VERSION = !JAVA_VERSION!
-  echo OS_ARCH = !OS_ARCH!
 
-  if !OS_ARCH! equ amd64 (
-    echo.
-    echo The provided JDK is 64-bit. This application requires 32-bit JDK.
-    goto :END
-  )
-)
-
-if not exist "%MYAPP_HOME%" (
-  echo.
-  echo 'MYAPP_HOME' environment variable is not set or has inappropriate value.
-  goto :END
-)
-if not exist "%OPENCV_DIR%" (
-  echo.
-  echo 'OPENCV_DIR' environment variable is not set or has inappropriate value.
-  goto :END
-)
-echo MYAPP_HOME = %MYAPP_HOME%
-echo OPENCV_DIR = %OPENCV_DIR%
-
-set CLASSPATH=%MYAPP_HOME%\conf;%MYAPP_HOME%\lib\*
-
-:: For more on JVM options, refer http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html
-set JVM_ARGS=-server -Xms256m -Xmx256m -XX:MaxPermSize=256M
-set JVM_ARGS=%JVM_ARGS% -XX:NewRatio=2 -XX:SurvivorRatio=8
-if %JAVA_VERSION:~0,3% equ 1.7 (
-  set JVM_ARGS=%JVM_ARGS% -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:G1ReservePercent=10
-) else (
-  set JVM_ARGS=%JVM_ARGS%  -XX:+UseParallelGC -XX:+UseParallelOldGC -XX:+UseNUMA
-)
-set JVM_ARGS=%JVM_ARGS% -verbose:gc -Xloggc:"%MYAPP_HOME%\log\jvm\gc_%%t.log" -XX:+PrintGCDateStamps -XX:+PrintGCDetails
-set JVM_ARGS=%JVM_ARGS% -XX:NativeMemoryTracking=detail
-set JVM_ARGS=%JVM_ARGS% -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics
-set JVM_ARGS=%JVM_ARGS% -XX:+DisableExplicitGC
-set JVM_ARGS=%JVM_ARGS% -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath="%MYAPP_HOME%\jvm"
-set JVM_ARGS=%JVM_ARGS% -XX:ErrorFile="%MYAPP_HOME%\jvm\hs_err_pid%%p.log"
-set JVM_ARGS=%JVM_ARGS% -Djava.library.path="%OPENCV_DIR%\..\..\java\x86"
-set JVM_ARGS=%JVM_ARGS% -Dfile.encoding=UTF-8
-set JVM_ARGS=%JVM_ARGS% -Duser.timezone=Asia/Seoul
-rem set JVM_ARGS=%JVM_ARGS% -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8000
-set JVM_ARGS=%JVM_ARGS% -Dcom.sun.management.jmxremote.port=3333
-set JVM_ARGS=%JVM_ARGS% -Dcom.sun.management.jmxremote.ssl=false
-set JVM_ARGS=%JVM_ARGS% -Dcom.sun.management.jmxremote.authenticate=false
-set JVM_ARGS=%JVM_ARGS% -Dlog.level.root=TRACE
-set JVM_ARGS=%JVM_ARGS% -Dlog.level.spring=DEBUG
-set JVM_ARGS=%JVM_ARGS% -Dlog.level.mybatis=DEBUG
-set JVM_ARGS=%JVM_ARGS% -Dlog.timezone=Asia/Seoul
-
-echo ************************************************
-echo '"%JAVA_HOME%\bin\java" %JVM_ARGS% -cp "%CLASSPATH%" myapp.StandaloneServer'
-echo ************************************************
-
-"%JAVA_HOME%\bin\java" %JVM_ARGS% -cp "%CLASSPATH%" myapp.StandaloneServer
-
-:END
-endLocal
-```
-
-### Waiting **`Enter`** key press on the console
-
-Using **`java.io.InputStream.read()`**, **`java.util.Scanner.hasNextLine()`**, or **`java.util.Scanner.nexLine()`** may make the code simple, but they are much bad on behalf of performance in con
-current environment or debugging situation. To make other thread or debugging session unaffected as possible, it is better to use **`java.io.InputStream.available()`** with loop.
-
-``` java
-   ...
-   System.out.println("Press [Enter] key to start."); 
-   int cnt;
-   while((cnt = System.in.available()) < 1){
-      Thread.sleep(500);
-   }
-   while(cnt-- > 0) System.in.read();
-   ...
-
-   System.out.println("Press [Enter] key to proceed."); 
-   while((cnt = System.in.available()) < 1){
-      Thread.sleep(500);
-   }
-   while(cnt-- > 0) System.in.read();
-   ...
-
-   System.out.println("Press [Enter] key to end."); 
-   while((cnt = System.in.available()) < 1){
-      Thread.sleep(500);
-   }
-   while(cnt-- > 0) System.in.read();
-```
-
-You should call the `available()` in the loop, because it is non blocking. The keys pressed before `Enter` should be consumed before the next wait.
-
--   Readings
-    -   \[<http://docs.oracle.com/javase/6/docs/api/java/io/InputStream.html#available>() API of `java.io.InputStream.available()`\]
-
-### **`wait`**, **`notify`** and **`notifyAll`**
-
-The thread should own the monitor of the instance to call `wait`, `notify` or `notifyAll` before the call. So, the call of these basic method should be <strong>always located inside `synchronized
-` block</strong>.
-
-A thread can wake up by unexpected or unpredictable reason, so the call of `wait` and the logic to process after wake-up should be guarded by loop.
-
-So, the typical code block for calling `wait` is
-
-``` java
-   ...
-   final Object obj = new Object;
-   ...
-
-   synchronized (obj) {
-         while (<condition does not hold>)
-             obj.wait(timeout);
-         ... // Perform action appropriate to condition
-   }
-
-   ...
-```
-
-And for `notifyAll`
-
-``` java
-   ...
-   final Object obj = new Object;
-   ...
-
-   synchronized (obj) {
-      //Perform some action to release the hold condition
-      obj.notifyAll();
-      ...
-   }
-
-   ...
-```
-
-### Using <strong>`Lock`</strong> class of <strong>`java.util.concurrent.locks`</strong> package
-
-``` java
-paul@ubuntu1:~/projects/wikiconversion$ cat  patterns_samples.markdown 
-Java
-----
-
-### JVM startup command-line
-
--   References
-    -   [Java HotSpot VM Options](http://www.oracle.com/technetwork/java/javase/tech/vmoptions-jsp-140102.html)
-    -   [JVM 8 Command-line Options](http://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html#CBBIJCHG)
-    -   [Troubleshooting Guide for Java SE 6 with HotSpot VM](http://www.oracle.com/technetwork/java/javase/index-137495.html) (Nov. 2008)
-
-``` dos
-:: Starts stand-alone MyApp server
-::
-:: @author Sangmoon Oh
-:: @since 2015-01-01
-
-@ echo off
-setLocal enableDelayedExpansion
-
-if not exist "%JAVA_HOME%\bin\java.exe" (
-  echo.
-  echo Fail to run
-  echo JDK 1.6 ^(32-bit^) or higher and 'JAVA_HOME' environment variable for it are required.
-  goto :END
-)
-echo JAVA_HOME = %JAVA_HOME%
-
-if exist "%JAVA_HOME%\release" (
-  for /F "tokens=2 delims==" %%x in ('findstr "JAVA_VERSION" "%JAVA_HOME%\release"') do set JAVA_VERSION=%%~x
-  for /F "tokens=2 delims==" %%x in ('findstr "OS_ARCH" "%JAVA_HOME%\release"') do set OS_ARCH=%%~x
-  
   echo JAVA_VERSION = !JAVA_VERSION!
   echo OS_ARCH = !OS_ARCH!
 
@@ -265,7 +96,7 @@ Using **`java.io.InputStream.read()`**, **`java.util.Scanner.hasNextLine()`**, o
 
 ``` java
    ...
-   System.out.println("Press [Enter] key to start."); 
+   System.out.println("Press [Enter] key to start.");
    int cnt;
    while((cnt = System.in.available()) < 1){
       Thread.sleep(500);
@@ -273,14 +104,14 @@ Using **`java.io.InputStream.read()`**, **`java.util.Scanner.hasNextLine()`**, o
    while(cnt-- > 0) System.in.read();
    ...
 
-   System.out.println("Press [Enter] key to proceed."); 
+   System.out.println("Press [Enter] key to proceed.");
    while((cnt = System.in.available()) < 1){
       Thread.sleep(500);
    }
    while(cnt-- > 0) System.in.read();
    ...
 
-   System.out.println("Press [Enter] key to end."); 
+   System.out.println("Press [Enter] key to end.");
    while((cnt = System.in.available()) < 1){
       Thread.sleep(500);
    }
@@ -390,7 +221,7 @@ class Control{
          results.add(future.get());
       }
 
-      //manipulating results 
+      //manipulating results
 
       executor.shutdown();
    }
@@ -446,10 +277,10 @@ A typical code would be like this :
 ``` java
 @ThreadSafe
 public class Worker{
- 
+
    private volatile Resource resource = null; //creating resource is expensive
    private final String lock = String.valueOf(-1);  //avoid String intern.
- 
+
    @GuardedBy("lock")
    public Resource getResource(){
       Resource r = resource;
@@ -463,7 +294,7 @@ public class Worker{
       }
       return r;
    }
-    
+
    ...
 }
 ```
@@ -473,10 +304,10 @@ In above sample code, note that the `lock` object is define to be `final`, becau
 ``` java
 @ThreadSafe
 public class Worker{
- 
+
    private volatile Resource resource = null; //creating resource is expensive
    private final Lock lock = new ReentrantLock();
- 
+
    @GuardedBy("lock")
    public Resource getResource(){
       Resource r = resource;
@@ -495,7 +326,7 @@ public class Worker{
       }
       return r;
    }
-    
+
    ...
 }
 ```
@@ -594,15 +425,15 @@ JVM load classes in lazy way and JVM run static initilizers at class initilizati
 
 ``` java
 public class Worker{
- 
+
    private static class ResourceHolder{
       public static Resource resource = new Resource();
    }
- 
+
    public static Resource getResource(){
       return ResourceHolder.resource;
    }
-    
+
    ...
 }
 ```
@@ -627,15 +458,15 @@ Assuming `ConcurrentHashMap.put` method may not be so complicated to expose stal
 
 ``` java
 package org.springframework.context.annotation;
- 
+
 public class CommonAnnotationBeanPostProcessor extends ...{
- 
+
   ...
   private transient final Map<Class<?>, InjectionMetadata> injectionMetadataCache =
   new ConcurrentHashMap<Class<?>, InjectionMetadata>();
- 
+
   ...
- 
+
   private InjectionMetadata findResourceMetadata(final Class clazz) {
     // Quick check on the concurrent map first, with minimal locking.
     InjectionMetadata metadata = this.injectionMetadataCache.get(clazz);
@@ -718,8 +549,8 @@ public class CommonAnnotationBeanPostProcessor extends ...{
       }
     }
     return metadata;
-  }   
- 
+  }
+
   ...
 }
 ```
@@ -739,11 +570,11 @@ public class CommonAnnotationBeanPostProcessor extends ...{
 abstract class FormatCache<F extends Format> {
 
     static final int NONE= -1;
-    
-    private final ConcurrentMap<MultipartKey, F> cInstanceCache 
+
+    private final ConcurrentMap<MultipartKey, F> cInstanceCache
         = new ConcurrentHashMap<MultipartKey, F>(7);
-    
-    private static final ConcurrentMap<MultipartKey, String> cDateTimeInstanceCache 
+
+    private static final ConcurrentMap<MultipartKey, String> cDateTimeInstanceCache
         = new ConcurrentHashMap<MultipartKey, String>(7);
 
     public F getInstance() {
@@ -762,13 +593,13 @@ abstract class FormatCache<F extends Format> {
         }
         final MultipartKey key = new MultipartKey(pattern, timeZone, locale);
         F format = cInstanceCache.get(key);
-        if (format == null) {           
+        if (format == null) {
             format = createInstance(pattern, timeZone, locale);
             final F previousValue= cInstanceCache.putIfAbsent(key, format);
             if (previousValue != null) {
                 // another thread snuck in and did the same work
                 // we should return the instance that is in ConcurrentMap
-                format= previousValue;              
+                format= previousValue;
             }
         }
         return format;
@@ -788,8 +619,8 @@ abstract class FormatCache<F extends Format> {
 public static <T> PropertyMeta<?> getPropertyMeta(
       @Nonnull String name, @Nonnull PropertyType type,
       String title, String desc, Boolean required,
-      Double max, Boolean exclusiveMax, Double min, 
-      Doolean exclusiveMin, Integer maxLen, Integer minLen, 
+      Double max, Boolean exclusiveMax, Double min,
+      Doolean exclusiveMin, Integer maxLen, Integer minLen,
       T[] enums, String pattern, T defaultValue){
 ...
 }
@@ -844,7 +675,7 @@ Classes in `java.io` or `java.sql` packages handle system resources on networkin
       this.logger.error("Can't write the Employee list", ex);
       throw new RuntimeException("Can't write the Employee list", ex);
     }
-  } 
+  }
 
   public void writeEmployeesToFileUnsafe(@Nonnull List<Employee> emps, String path){
 
@@ -855,7 +686,7 @@ Classes in `java.io` or `java.sql` packages handle system resources on networkin
     try{
       fos = new FileOutputStream(path);
       bos = new BufferedOutputStream(fos, 1000);
-      ps =  new PrintStream(bos, true, "utf-8"); //may throw UnsupportedEncodingException 
+      ps =  new PrintStream(bos, true, "utf-8"); //may throw UnsupportedEncodingException
 
       for(Employee emp : emps){
         ps.println(emp.toString());
@@ -865,8 +696,8 @@ Classes in `java.io` or `java.sql` packages handle system resources on networkin
       throw new RuntimeException("Can't write the Employee list", ex);
     }finally{
       //This block explicitly closes only ps and does NOT close fos and bos.
-      //In usual case, closing ps also closes underlying fos and bos. 
-      //But if exception occurrs at new PrintStream in try block, 
+      //In usual case, closing ps also closes underlying fos and bos.
+      //But if exception occurrs at new PrintStream in try block,
       //bos and fos may remain unclosed.
       // -> UNSAFE
 
@@ -896,7 +727,7 @@ Classes in `java.io` or `java.sql` packages handle system resources on networkin
       //Same with right above case.
       //When the exception occurs creating PrintStream after the underlying
       //BufferedStream and FileOutputStream, the underlying streams would
-      //remain unclosed with the following code. 
+      //remain unclosed with the following code.
       // -> UNSAFE
 
       if(ps != null){
@@ -904,7 +735,7 @@ Classes in `java.io` or `java.sql` packages handle system resources on networkin
         catch(Exception ex){ this.logger.error("Can't close a resource", ex); }
       }
     }
-  } 
+  }
 
   public void writeEmployeesToFileSafe(@Nonnull List<Employee> emps, String path){ // method with SAFE codes
 
@@ -917,7 +748,7 @@ Classes in `java.io` or `java.sql` packages handle system resources on networkin
     PrintStream ps = null;
 
     try{
-      //There a PrintStream(File) constructor which dosen't 
+      //There a PrintStream(File) constructor which dosen't
       //need to create underlying FileOutputStream or BufferedOutputStream.
       //But, this sample dosen't use it to show the intended code pattern.
 
@@ -934,7 +765,7 @@ Classes in `java.io` or `java.sql` packages handle system resources on networkin
       throw new RuntimeException("Can't write the Employee list", ex);
     }finally{
       //take care of order - close the underlying reource first.
-      //take care of each try/catch pattern 
+      //take care of each try/catch pattern
       // - close also can throw exception, but shouldn't block the next tries of close.
 
       if(fos != null){
@@ -969,8 +800,8 @@ public List<Employee> listEmployees(@Nonnull List<String> ids){  // method with 
 
   Employee emp = null;
   try{
-    //In most cases, data-source manages connection pool internally. 
-    conn = this.getDataSource().getConnection(); 
+    //In most cases, data-source manages connection pool internally.
+    conn = this.getDataSource().getConnection();
     ps = conn.prepareStatement(qry);
 
     for(String id : ids){
@@ -990,8 +821,8 @@ public List<Employee> listEmployees(@Nonnull List<String> ids){  // method with 
       //Close each ResultSet in the iteration
       //Although the spec says that closing of Statement can open only one
       //ResultSet at a time and closing a Statement also close the ResultSet
-      //retunred by the Statement, you'd better not trust the implementations 
-      //too much.  
+      //retunred by the Statement, you'd better not trust the implementations
+      //too much.
       if(rs != null){
         try{ rs.close(); }
         catch(Exception ex){ this.logger.error("Can't close ResultSet object", ex); }
@@ -1003,8 +834,8 @@ public List<Employee> listEmployees(@Nonnull List<String> ids){  // method with 
     throw new RuntimeException("Can't list specified employees.", ex);
   }finally{
     //take care of order - reverse of creation order
-    //take care of each try/catch pattern 
-    // - close also can throw exception, but shouldn't block the next lines.      
+    //take care of each try/catch pattern
+    // - close also can throw exception, but shouldn't block the next lines.
 
     if(rs != null){
       try{ rs.close(); }
@@ -1017,7 +848,7 @@ public List<Employee> listEmployees(@Nonnull List<String> ids){  // method with 
     if(conn != null){
       try{ conn.close(); }
       catch(Exception ex){ this.logger.error("Can't close Connection object", ex); }
-    }     
+    }
   }
   return result;
 }
@@ -1104,14 +935,14 @@ You can get all name-class pairs under **`InitialContext`** of your application 
 ``` java
 /**
  * Retrieve all name class pairs recursively under the given naming context.
- * 
+ *
  * @return
  */
 public static Map<String, NameClassPair> getNameClassPairsUnderContext(String name, Context cntx) throws NamingException{
- 
+
   if(cntx == null) throw new IllegalArgumentException("Context shouldn't be null.");
-   
-  Map<String, NameClassPair> result = new HashMap<String, NameClassPair>(); 
+
+  Map<String, NameClassPair> result = new HashMap<String, NameClassPair>();
   NamingEnumeration<NameClassPair> pairs = cntx.list("");
   NameClassPair pair = null;
   Object obj = null;
@@ -1120,14 +951,14 @@ public static Map<String, NameClassPair> getNameClassPairsUnderContext(String na
     pair = pairs.next();
     obj = cntx.lookup(pair.getName());
     path = name + "/" + pair.getName();
-     
+
     if(obj instanceof javax.naming.Context){
       result.put(path, pair);
       result.putAll(getNameClassPairsUnderContext(path, (Context)obj));
     }
     else{ result.put(path, pair);}
   }
-   
+
   return result;
 }
 ```
@@ -1382,16 +1213,16 @@ log4j.appender.DRFA.layout.ConversionPattern=%d{yy/MM/dd HH:mm:ss} %-5p %c{2} (%
 ### Identifying the implementation of JAXP in use
 
 ``` java
-      System.out.printf("%1$s = %2$s\n", 
+      System.out.printf("%1$s = %2$s\n",
             "javax.xml.parsers.SAXParserFactory", System.getProperty("javax.xml.parsers.SAXParserFactory"));
-      System.out.printf("%1$s = %2$s\n", 
+      System.out.printf("%1$s = %2$s\n",
             "javax.xml.parsers.DocumentBuilderFactory", System.getProperty("javax.xml.parsers.DocumentBuilderFactory"));
-      System.out.printf("%1$s = %2$s\n", 
+      System.out.printf("%1$s = %2$s\n",
             "javax.xml.transform.TransformerFactory", System.getProperty("javax.xml.transform.TransformerFactory"));
-      System.out.printf("%1$s = %2$s\n", 
+      System.out.printf("%1$s = %2$s\n",
             "javax.xml.xpath.XPathFactory", System.getProperty("javax.xml.xpath.XPathFactory"));
-      System.out.printf("%1$s = %2$s\n", 
-            "javax.xml.validation.SchemaFactory", System.getProperty("javax.xml.validation.SchemaFactory"));      
+      System.out.printf("%1$s = %2$s\n",
+            "javax.xml.validation.SchemaFactory", System.getProperty("javax.xml.validation.SchemaFactory"));
 
       System.out.printf("SaxParserFactory implementation = %1$s\n",
             SAXParserFactory.newInstance().getClass().getName());
@@ -1450,19 +1281,19 @@ When using DOM parser, the exact location of invalid element is difficulty to ge
     ...
     URL schUrl = ClassLoader.getSystemResource("component-meta.xsd");
     URL xmlUrl = ClassLoader.getSystemResource("component-meta-valid.xml");
-    
+
     SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
     //A Schema object is thread safe and applications are encouraged to share it across many parsers in many threads.
     Schema sch = sf.newSchema(new java.io.File(schUrl.toURI()));
     //A validator object is not thread-safe and not reentrant.
-    Validator vldt = sch.newValidator(); 
-    
+    Validator vldt = sch.newValidator();
+
     SimpleCollectiveErrorHandler errHandler = new SimpleCollectiveErrorHandler();
     vldt.setErrorHandler(errHandler);
     vldt.validate(new StreamSource(new java.io.File(xmlUrl.toURI())));
-    
+
     List<SAXParseException> errors = errHandler.getErrors();
-    
+
     System.err.println("There exist " + errors.size() + " errors.");
     for(SAXParseException error : errors){
       SimpleCollectiveErrorHandler.printSAXParseException(System.err, error);
@@ -1485,7 +1316,7 @@ public class SimpleCollectiveErrorHandler extends DefaultHandler{
   public boolean hasError(){ return !this.errors.isEmpty(); }
 
   @Override public void warning(SAXParseException ex){}
-  @Override public void error(SAXParseException ex){ this.errors.add(ex); } 
+  @Override public void error(SAXParseException ex){ this.errors.add(ex); }
   @Override public void fatalError(SAXParseException ex){ this.errors.add(ex); }
 
   public void printErrors(PrintStream ps){
@@ -1528,16 +1359,16 @@ To successfully apply the schema without the modification (such as adding `xmlns
 
 ``` xml
 <xsd:schema
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified">
 
 <xsd:annotation>
   <xsd:documentation>
-adding the following attribute to the schema element will prevent 
+adding the following attribute to the schema element will prevent
 applying this schema to the document without namespace declarations
 using xmlns or xsi:noNamespaceSchemaLocation attribute
 
-  xmlns="http://www.3rdstage.org/schema/component-meta" 
+  xmlns="http://www.3rdstage.org/schema/component-meta"
   targetNamespace="http://www.3rdstage.org/schema/component-meta"
   </xsd:documentation>
 </xsd:annotation>
@@ -1785,7 +1616,7 @@ import freemarker.template.Template;
 
   //set static methods and enums as shared variables.
   config.setSharedVariable("statics", BeansWrapper.getDefaultInstance().getStaticModels());
-  config.setSharedVariable("enums", BeansWrapper.getDefaultInstance().getEnumModels()); 
+  config.setSharedVariable("enums", BeansWrapper.getDefaultInstance().getEnumModels());
 
   //template, NOT thread-safe
   Template tpl = config.getTemplate("foo/bar/Schedule.ftl");
@@ -2218,25 +2049,25 @@ The following is simple sample.
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
- 
+
 public class ObjectInspector {
-  
+
    // SpelExpressionParser is thread-safe which is explicitly documented in API doc.
    private ExpressionParser expressionParser = new SpelExpressionParser();
- 
+
    /**
     * Evaluate the given boolean expression against the specified object.
     *
     * This method is thread-safe.
-    * 
+    *
     * @param obj object to check
     * @param booleanExpr boolean expression to evaluate which should be valid with SpEL
     * @param clazz the type of the <code>obj</code>
     */
    public <T> boolean checkBooleanExpression(T obj, String booleanExpr, Class<T> clazz){
- 
+
       StandardEvaluationContext cntx = new StandardEvaluationContext(obj);
-      return this.expressionParser.parseExpression(booleanExpr).getValue(cntx, Boolean.class); 
+      return this.expressionParser.parseExpression(booleanExpr).getValue(cntx, Boolean.class);
    }
 }
 ```
@@ -2354,15 +2185,15 @@ server.threadpool.threadNamePrefix="toolServerThread-"
 
  <context:property-placeholder location="classpath:sample/server/case2/props-server.properties"/>
 
- <bean id="jmxExporter" 
+ <bean id="jmxExporter"
   class="org.springframework.jmx.export.MBeanExporter" lazy-init="false">
   <property name="beans">
    <map>
     <entry key="#{${server.threadpool.mbeanName}}" value-ref="threadPool"/>
    </map>
-  </property> 
+  </property>
  </bean>
- 
+
  <bean id="threadPool"
   class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
   lazy-init="false">
@@ -2589,7 +2420,7 @@ As of Jetty 9, the most simple configuration is using only **`org.eclipse.jetty:
          <groupId>org.eclipse.jetty</groupId>
          <artifactId>jetty-server</artifactId>
          <version>${jetty.version}</version>
-      </dependency>      
+      </dependency>
       <dependency>
          <groupId>org.eclipse.jetty</groupId>
          <artifactId>jetty-webapp</artifactId>
@@ -2638,7 +2469,7 @@ The Java code to setup and load Jetty without `jetty.xml` is like the following.
    jetty.setHandler(webApp);
    jetty.setStopAtShutdown(true);
    jetty.start();
-   //jetty.join(); 
+   //jetty.join();
    ...
 ```
 
@@ -4203,7 +4034,7 @@ Ant
 
   <!-- Define Maven-Ant tasks -->
   <!-- For more on Maven-Ant tasks, refer http://maven.apache.org/ant-tasks/ -->
-  <typedef resource="org/apache/maven/artifact/ant/antlib.xml" 
+  <typedef resource="org/apache/maven/artifact/ant/antlib.xml"
     uri="antlib:org.apache.maven.artifact.ant"
     classpath="lib/maven-ant-tasks-2.1.3.jar">
   </typedef>
@@ -4241,17 +4072,17 @@ Ant
     classpathref="ant.tasks.classpath" />
 
   <!-- Define Antelope tasks -->
-  <taskdef name="stringutil" classname="ise.antelope.tasks.StringUtilTask" 
+  <taskdef name="stringutil" classname="ise.antelope.tasks.StringUtilTask"
     uri="antlib:ise.antelope.tasks" classpathref="ant.tasks.classpath" />
-  <taskdef name="if" classname="ise.antelope.tasks.IfTask" 
+  <taskdef name="if" classname="ise.antelope.tasks.IfTask"
     uri="antlib:ise.antelope.tasks" classpathref="ant.tasks.classpath" />
-  <taskdef name="var" classname="ise.antelope.tasks.Variable" 
+  <taskdef name="var" classname="ise.antelope.tasks.Variable"
     uri="antlib:ise.antelope.tasks" classpathref="ant.tasks.classpath" />
-  <taskdef name="unset" classname="ise.antelope.tasks.Unset" 
+  <taskdef name="unset" classname="ise.antelope.tasks.Unset"
     uri="antlib:ise.antelope.tasks" classpathref="ant.tasks.classpath" />
 
   <!-- Define SvnAnt tasks -->
-  <typedef resource="org/tigris/subversion/svnant/svnantlib.xml" 
+  <typedef resource="org/tigris/subversion/svnant/svnantlib.xml"
     classpathref="ant.tasks.classpath" />
 
   <!-- Define TestNG tasks -->
@@ -4293,7 +4124,7 @@ Ant
     </svnant:svn>
     <contrib:propertyregex property="ver.wo.snapshot" input="${project.pom.version}"
       regexp="([0-9]+(\.[0-9]+)?(\.[0-9]+)?)" select="\1" defaultValue="0.0.0" />
-      
+
     <contrib:propertyregex property="ver.major" input="${project.pom.version}"
       regexp="([0-9]+)(?:\.([0-9]+))?(?:\.([0-9]+))?(.+)?" select="\1" />
     <contrib:propertyregex property="ver.minor" input="${project.pom.version}"
@@ -4325,7 +4156,7 @@ Ant
   <property name="jetty.jmxPort" value="3333"/>
   <property name="jetty.stopPort" value="8087"/>
   <property name="jetty.stopKey" value="stopnow"/>
-  
+
   <artifact:dependencies pathId="jetty.classpath">
     <dependency groupId="org.mortbay.jetty" artifactId="jetty-runner" version="${jetty.ver}"/>
     <dependency groupId="org.eclipse.jetty" artifactId="jetty-start" version="${jetty.ver}"/>
@@ -4336,10 +4167,10 @@ Ant
   <target name="jetty.runner.help"
     description="Print command line help of jetty-runner">
     <java jar="${org.mortbay.jetty:jetty-runner:jar}" fork="true">
-      <arg line="--help"/>  
+      <arg line="--help"/>
     </java>
   </target>
-  
+
   <target name="jetty.run"
     description="Run Jetty server">
     <java jar="${org.mortbay.jetty:jetty-runner:jar}" fork="true" spawn="false">
@@ -4368,7 +4199,7 @@ Ant
     <java jar="${org.eclipse.jetty:jetty-start:jar}" fork="true">
       <jvmarg value="-DSTOP.PORT=${jetty.stopPort}"/>
       <jvmarg value="-DSTOP.KEY=${jetty.stopKey}"/>
-      <arg value="--stop"/> 
+      <arg value="--stop"/>
     </java>
   </target>
 ```
@@ -4518,7 +4349,7 @@ Ant
       <link href="http://docs.jboss.org/hibernate/validator/5.2/api/"/>
       <link href="http://commons.apache.org/proper/commons-lang/javadocs/api-3.3.2/"/>
       <link href="http://commons.apache.org/proper/commons-collections/javadocs/api-release/"/>
-      <link href="http://google-guice.googlecode.com/svn/tags/3.0/javadoc/packages.html"/>      
+      <link href="http://google-guice.googlecode.com/svn/tags/3.0/javadoc/packages.html"/>
       <link href="http://docs.spring.io/spring/docs/4.0.x/javadoc-api/"/>
       <link href="https://jersey.java.net/apidocs/1.11/jersey/"/>
     </javadoc>
@@ -4856,7 +4687,7 @@ But the following code doesn't show proper contents in Eclipse Outline view. Nee
   } else if (typeof module === "object" && module.exports) {
     module.exports = d3;
   } else {
-    window.d3 = d3;  
+    window.d3 = d3;
   }
 )(window, window.jQuery);
 ```
@@ -4871,9 +4702,9 @@ Use more semantic variables of **`dimensions`**, **`paddings`**, **`area`**, **`
   var area = {
     x : [paddings.left, dimensions.width - paddings.right],
     y : [dimensions.height - paddings.bottom, paddings.top]  //large value first !
-  } 
+  }
   var domains = {
-    x : [new Date(2014,4,1,0,0,0), new Date(2014,4,1,0,1,0)], 
+    x : [new Date(2014,4,1,0,0,0), new Date(2014,4,1,0,1,0)],
     y : [0, 100]
   }
   var r = 3;
@@ -4938,7 +4769,7 @@ HTML and CSS
 ``` css
 body {
   font-family: "맑은 고딕", Georgia, Verdana, sans-serif;
-  font-size: 1.0em; 
+  font-size: 1.0em;
   line-height:1.5;
   margin-left:2.0em;
   counter-reset: step-h3;
@@ -4947,7 +4778,7 @@ body {
 pre, code, tt {
   font-family: Consolas,monospace,Courier;
   font-size: 1.0em;
-  line-height: 1.3 !important; 
+  line-height: 1.3 !important;
 }
 
 table { border-collapse: collapse; }
@@ -5087,8 +4918,8 @@ There are two types of hierarchical queries handling tree structure data in adja
 -   [Hierarchical Queries of Oracle Database 10g](http://download.oracle.com/docs/cd/B19306_01/server.102/b14200/queries003.htm#i2053935)
 
 ``` sql
-SELECT ~ 
-FROM ~ 
+SELECT ~
+FROM ~
 WHERE ~
 START WITH parent_id IS NULL
 CONNECT BY PRIOR id = parent_id
@@ -5123,7 +4954,7 @@ create table category(
 The basic query is :
 
 ``` sql
-select id, name, parent_id, seq, descn, 
+select id, name, parent_id, seq, descn,
 from category
 START WITH parent_id is null
 CONNECT BY PRIOR id = parent_id
@@ -5132,7 +4963,7 @@ CONNECT BY PRIOR id = parent_id
 Oracle 9i provides **`LEVEL`** pseudo-column, **`SYS_CONNECT_BY`** function and **`ORDER SIBLINGS BY`** clause which can be used in hierarchical queries.
 
 ``` sql
-select id, name, parent_id, seq, LEVEL, descn, 
+select id, name, parent_id, seq, LEVEL, descn,
        SYS_CONNECT_BY_PATH(id, '//') as id_path,
        SYS_CONNECT_BY_PATH(name, '//') as name_path
 from category
@@ -5144,7 +4975,7 @@ ORDER SIBLINGS BY seq, name
 Oracle 10g provides additional **`CONNECT_BY_ISLEAF`** pseudo-column, **`CONNECT_BY_ISCYCLE`** pseudo-column and **`CONNECT BY NOCYCLE`**.
 
 ``` sql
-select id, name, parent_id, seq, LEVEL, descn, 
+select id, name, parent_id, seq, LEVEL, descn,
        SYS_CONNECT_BY_PATH(id, '//') as id_path,
        SYS_CONNECT_BY_PATH(name, '//') as name_path,
        CONNECT_BY_ISLEAF as is_leaf
@@ -5161,7 +4992,7 @@ The basic hierarchical query is
 ``` sql
 WITH v_category("id", "name", "level", parent_id) as (
    select "id", "name", 1 as "level", parent_id
-   from category 
+   from category
    where id is null
    union all
    select a."id", b."level" + 1, a.parent_id
