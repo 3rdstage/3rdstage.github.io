@@ -3,3 +3,13 @@
 
 @import "{{ site.theme }}";
 
+div.wrapper {
+  counter-reset:level-1-no;
+  font-size:1.0em;
+  line-height:1.5;
+}
+
+div.wrapper h2:before{
+  content:counter(level-1-no) ". ";
+  counter-increment:step-for-sec;
+}
