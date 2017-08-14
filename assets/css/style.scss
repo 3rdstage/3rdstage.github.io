@@ -3,6 +3,10 @@
 
 @import "{{ site.theme }}";
 
+div.wrapper code, div.wrapper pre {
+  font-family: Consolas, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
+}
+
 div.wrapper {
   counter-reset:level-1-no;
   font-size:1.0em;
@@ -51,7 +55,4 @@ div.wrapper h6:before{
 }
 
 
-div.wrapper code, div.wrapper pre {
-  font-family: Consolas, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
-}
 

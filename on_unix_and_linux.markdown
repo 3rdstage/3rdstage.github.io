@@ -1,11 +1,11 @@
 Basic
 -----
 
--   [POSIX.1-2008](http://pubs.opengroup.org/onlinepubs/9699919799/)
--   [Linux Foundation Referenced Specifications](http://refspecs.linuxfoundation.org/)
--   [Filesystem Hierarchy Standard](http://refspecs.linuxfoundation.org/fhs.shtml)
-    -   [Hierarchy Standard 3.0](http://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html) (June 3, 2015)
-    -   [Hierarchy Standard 2.3](http://refspecs.linuxfoundation.org/FHS_2.3/fhs-2.3.html) (January 29, 2004)
+- [POSIX.1-2008](http://pubs.opengroup.org/onlinepubs/9699919799/)
+- [Linux Foundation Referenced Specifications](http://refspecs.linuxfoundation.org/)
+- [Filesystem Hierarchy Standard](http://refspecs.linuxfoundation.org/fhs.shtml)
+    - [Hierarchy Standard 3.0](http://refspecs.linuxfoundation.org/FHS_3.0/fhs-3.0.html) (June 3, 2015)
+    - [Hierarchy Standard 2.3](http://refspecs.linuxfoundation.org/FHS_2.3/fhs-2.3.html) (January 29, 2004)
 -   [The Linux man-pages project](https://www.kernel.org/doc/man-pages/)
 -   [Linux kernel source](https://github.com/torvalds/linux)
 -   [Cygwin User's Guide](http://cygwin.com/cygwin-ug-net/cygwin-ug-net.html)
@@ -762,21 +762,21 @@ $ netstat -na
 For Linux,
 
 ``` bash
-   
+
 $ netstat -nap
 ```
 
 You need root privilege to take effect of **`-p`** option To find out whether a given port is being used or not, use `grep` command.
 
 ``` bash
-   
+
 $ netstat -nap | grep -E '(^Proto)|(8080)'
 ```
 
 For Windows,
 
 ``` bash
-   
+
 $ netstat -nao
 ```
 
@@ -787,7 +787,7 @@ For more about **`netstat`**, refer [topics in Wikipedia](http://en.wikipedia.or
 To identify what shell a user is set to use by default, you can check **`SHELL`** variable.
 
 ``` bash
-   
+
 $ echo $SHELL
 /bin/bash
 $ bin/ksh
@@ -808,7 +808,7 @@ As the above example shows, **`SHELL`** variable contains the login default shel
 To hide both the normal output and error output, redirect `stdout` and `stderr` to null device
 
 ``` bash
-   
+
 % npm ls -g json >/dev/null 2>&1
 % #or
 # npm ls -g y18n &>/dev/null
@@ -817,7 +817,7 @@ To hide both the normal output and error output, redirect `stdout` and `stderr` 
 To hide only the error output, redirect `stderr` to null device
 
 ``` bash
-   
+
 % npm ls -g json 2>/dev/null
 ```
 
@@ -830,7 +830,7 @@ When executing **`find`** command in simplest format, you may get lots of lines 
 You can use **`stderr`** redirection to cut out permission denied files (or directories).
 
 ``` bash
-   
+
 % find / -name '*.jar' 2>/dev/null
 ```
 
@@ -853,7 +853,7 @@ For more about **`find`** command and **`-exec`** operator including strange '{}
 #### Finding files containing the specified word
 
 ``` bash
-   
+
 % find /home |xargs grep "password"
 ```
 
@@ -906,7 +906,7 @@ Using `find` command
 To find lines not matching the specified patterns in a file, you can use **`-v`** option with **`grep`** command.
 
 ``` bash
-  
+
 $ svn list -R http://.../repos1 | grep -v -E '(.*java|.*/)'
 ```
 
@@ -936,7 +936,7 @@ For more about **`od`**, refer the following.
 You can redirect the result to `cat` or `less` command, or use `ww` flag.
 
 ``` bash
-% ps auxf | cat 
+% ps auxf | cat
 ...
 % ps auxfww
 ...
