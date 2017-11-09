@@ -1,1 +1,37 @@
-theme: jekyll-theme-dinky
+# Dependencies
+# markdown:       kramdown
+# highlighter:    rouge
+
+# kramdown:
+#  auto_ids:     true
+
+# Permalinks
+# permalink:      pretty
+
+# Server
+# source:         "."
+# destination:    ./_gh_pages
+# port:           9001
+# baseurl:        ""
+# url:            "https://getbootstrap.com"
+encoding:       UTF-8
+exclude:
+  - .settings/
+  - .git/
+  - .github/
+  - build/
+  - js/
+  - node_modules/
+  - scss/
+  - README.md
+
+plugins:
+  - jekyll-redirect-from
+  - jekyll-sitemap
+  - jekyll-toc
+
+# Social
+title:              3rdstage's Wiki
+description:        "Wiki of Sangmoon Oh"
+authors:            "Sangmoon Oh"
+
