@@ -25,10 +25,6 @@ exclude:
   - scss/
   - README.md
 
-plugins:
-  - jekyll-redirect-from
-  - jekyll-sitemap
-  - jekyll-toc
 
 # Social
 title:              3rdstage's Wiki
