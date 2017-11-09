@@ -1,4 +1,13 @@
-Computer Science/Programming General
+---
+layout: default
+title: Computer Programming General
+description: Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons, or any other element.
+group: utilities
+redirect_from: "/wiki/computer_programming_general"
+toc: true
+---
+
+Computer Programming General
 ------------------------------------
 
 -   [Type System](http://en.wikipedia.org/wiki/Type_system) (Wikipedia)
