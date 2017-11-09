@@ -1,3 +1,11 @@
+---
+layout: default
+title: On Linux and UNIX
+description: ...
+group: software developer
+toc: true
+---
+
 Basic
 -----
 

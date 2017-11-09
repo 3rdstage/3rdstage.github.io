@@ -1,9 +1,8 @@
 ---
 layout: default
-title: Platforms, Servers, Tools, and Utilities
-description: Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons, or any other element.
-group: utilities
-redirect_from: "/wiki/computer_programming_general"
+title: Platforms, Frameworks, Libraries and Tools
+description: ...
+group: software developer
 toc: true
 ---
 
