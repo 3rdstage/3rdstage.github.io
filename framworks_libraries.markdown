@@ -1,3 +1,12 @@
+---
+layout: default
+title: Platforms, Servers, Tools, and Utilities
+description: Use border utilities to quickly style the border and border-radius of an element. Great for images, buttons, or any other element.
+group: utilities
+redirect_from: "/wiki/computer_programming_general"
+toc: true
+---
+
 Platforms
 ---------
 
@@ -1792,7 +1801,7 @@ Candidate 1 : Using `relabel_configs`
     job_name: node
     static_configs:
       - targets: ['10.0.0.1:9100/brick1' '10.0.02:9100/brick1']
-      
+
     relabel_configs:
       - source_labels: [__address__]
         target_label: instance
@@ -1810,11 +1819,11 @@ Candidate 2 : Using `lables` for each target
   - scrape_config:
     job_name: node
     static_configs:
-      - targets: ['10.0.0.1:9100']  
+      - targets: ['10.0.0.1:9100']
         lables:
           "instance":"brick1"
           "role":"peer"
-      - targets: ['10.0.0.1:9100']  
+      - targets: ['10.0.0.1:9100']
         lables:
           "instance":"brick1"
           "role":"peer"
