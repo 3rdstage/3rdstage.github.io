@@ -19,7 +19,7 @@
 # port:           9001
 # baseurl:        ""
 # url:            "https://getbootstrap.com"
-encoding:       UTF-8
+encoding: utf-8
 exclude:
   - .settings/
   - .git/
@@ -32,9 +32,10 @@ exclude:
   - Gemfile
   - README.md
 
-
 # Social
 title:              3rdstage's Wiki
 description:        "Wiki of Sangmoon Oh"
 authors:            "Sangmoon Oh"
 
+gems:
+  - jekyll-sitemap
