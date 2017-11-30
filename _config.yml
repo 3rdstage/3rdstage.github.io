@@ -7,7 +7,12 @@
 # markdown:       kramdown
 # highlighter:    rouge
 
-# kramdown:
+markdown : kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+#  syntax_highlighter: rouge
 #  auto_ids:     true
 
 # Permalinks

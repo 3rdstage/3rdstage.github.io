@@ -102,7 +102,7 @@ endLocal
 
 Using **`java.io.InputStream.read()`**, **`java.util.Scanner.hasNextLine()`**, or **`java.util.Scanner.nexLine()`** may make the code simple, but they are much bad on behalf of performance in concurrent environment or debugging situation. To make other thread or debugging session unaffected as possible, it is better to use **`java.io.InputStream.available()`** with loop.
 
-``` java
+```java
    ...
    System.out.println("Press [Enter] key to start.");
    int cnt;
