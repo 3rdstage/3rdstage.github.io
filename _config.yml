@@ -3,27 +3,19 @@
 #  - https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
 #  - https://github.com/twbs/bootstrap/blob/v4.0.0-beta.2/_config.yml
 
-# Dependencies
-# markdown:       kramdown
-# highlighter:    rouge
+# Social
+title:              3rdstage's Wiki
+description:        "Wiki of Sangmoon Oh"
+authors:            "Sangmoon Oh"
 
 markdown : kramdown
-highlighter: rouge
+# highlighter: rouge
 
 kramdown:
   input: GFM
   syntax_highlighter: rouge
 #  auto_ids:     true
 
-# Permalinks
-# permalink:      pretty
-
-# Server
-# source:         "."
-# destination:    ./_gh_pages
-# port:           9001
-# baseurl:        ""
-# url:            "https://getbootstrap.com"
 encoding: utf-8
 exclude:
   - .settings/
@@ -37,12 +29,5 @@ exclude:
   - Gemfile
   - README.md
 
-# Social
-title:              3rdstage's Wiki
-description:        "Wiki of Sangmoon Oh"
-authors:            "Sangmoon Oh"
-
 gems:
   - jekyll-sitemap
-  
-  

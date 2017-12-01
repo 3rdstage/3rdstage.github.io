@@ -1,56 +1,71 @@
 ---
 ---
 
-div.wrapper code, div.wrapper pre {
+/* custom style */
+
+div.numbered code, div.wrapper pre {
   font-family: Consolas, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
 }
 
-div.wrapper {
+div.numbered {
   counter-reset:level-1-no;
   font-size:1.0em;
   line-height:1.5;
 }
 
-div.wrapper h2:before{
+div.numbered h2:before{
   content:counter(level-1-no) ". ";
   counter-increment:level-1-no;
 }
 
-div.wrapper h2{
+div.numbered h2{
   counter-reset:level-2-no;
 }
 
-div.wrapper h3:before{
+div.numbered h3:before{
   content:counter(level-1-no) "." counter(level-2-no) ". ";
   counter-increment:level-2-no;
 }
 
-div.wrapper h3{
+div.numbered h3{
   counter-reset:level-3-no;
 }
 
-div.wrapper h4:before{
+div.numbered h4:before{
   content:counter(level-1-no) "." counter(level-2-no) ". " counter(level-3-no) ". ";
   counter-increment:level-3-no;
 }
 
-div.wrapper h4{
+div.numbered h4{
   counter-reset:level-4-no;
 }
 
-div.wrapper h5:before{
+div.numbered h5:before{
   content:counter(level-1-no) "." counter(level-2-no) ". " counter(level-3-no) ". " counter(level-4-no) ". ";
   counter-increment:level-4-no;
 }
 
-div.wrapper h5{
+div.numbered h5{
   counter-reset:level-5-no;
 }
 
-div.wrapper h6:before{
+div.numbered h6:before{
   content:counter(level-1-no) "." counter(level-2-no) ". " counter(level-3-no) ". " counter(level-4-no) ". " counter(level-5-no) ". ";
   counter-increment:level-5-no;
 }
 
+div.content table{
+  border-collapse: collapse;
+  border-spacing: 0;
+  border:1px solid #ff0000;
+}
+
+div.content th{
+  border:1px solid #000000;
+}
+
+div.content td{
+  border:1px solid #000000;
+}
 
 
