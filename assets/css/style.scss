@@ -1,7 +1,27 @@
 ---
 ---
 
-/* custom style */
+/*
+Custom style
+Reference
+  - https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll
+*/
+
+body {
+  font: 13px helvetica,arial,freesans,clean,sans-serif;
+  line-height: 1.4;
+  margin: 1.0em 0px 1.0em 0px;
+  padding: 0px;
+}
+
+a, a:visited {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+li {
+  margin: 0px 0px 0.2em 0px;
+}
 
 div.numbered code, div.wrapper pre {
   font-family: Consolas, Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace;
@@ -9,8 +29,6 @@ div.numbered code, div.wrapper pre {
 
 div.numbered {
   counter-reset:level-1-no;
-  font-size:1.0em;
-  line-height:1.5;
 }
 
 div.numbered h2:before{
@@ -20,6 +38,11 @@ div.numbered h2:before{
 
 div.numbered h2{
   counter-reset:level-2-no;
+  font-size: 140%;
+  font-weight: bold;
+  color: #325d72;
+  border-bottom: 1px solid #ddd;
+  margin: 1.5em 0px 1.0em 0px;
 }
 
 div.numbered h3:before{
@@ -29,29 +52,38 @@ div.numbered h3:before{
 
 div.numbered h3{
   counter-reset:level-3-no;
+  font-size: 130%;
+  font-weight: bold;
+  color: #325d72;
+  border-bottom: 1px solid #ddd;
+  margin: 1.5em 0px 1.0em 0px;
 }
 
 div.numbered h4:before{
-  content:counter(level-1-no) "." counter(level-2-no) ". " counter(level-3-no) ". ";
+  content:counter(level-1-no) "." counter(level-2-no) "." counter(level-3-no) ". ";
   counter-increment:level-3-no;
 }
 
 div.numbered h4{
   counter-reset:level-4-no;
+  font-size: 115%;
+  font-weight: bold;
 }
 
 div.numbered h5:before{
-  content:counter(level-1-no) "." counter(level-2-no) ". " counter(level-3-no) ". " counter(level-4-no) ". ";
+  content:counter(level-1-no) "." counter(level-2-no) "." counter(level-3-no) "." counter(level-4-no) ". ";
   counter-increment:level-4-no;
 }
 
 div.numbered h5{
   counter-reset:level-5-no;
+  font-size: 105%;
 }
 
 div.numbered h6:before{
-  content:counter(level-1-no) "." counter(level-2-no) ". " counter(level-3-no) ". " counter(level-4-no) ". " counter(level-5-no) ". ";
+  content:counter(level-1-no) "." counter(level-2-no) "." counter(level-3-no) "." counter(level-4-no) "." counter(level-5-no) ". ";
   counter-increment:level-5-no;
+  font-size: 100%;
 }
 
 div.content table{
