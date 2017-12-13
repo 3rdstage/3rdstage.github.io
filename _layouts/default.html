@@ -9,9 +9,8 @@
         <div class="col-12 col-md-3 col-xl-2">
           {% include sidebar.html %}
         </div>
-
         <div class="col-12 col-md-9 col-xl-8 content numbered" role="main">
-        {{ content }}
+        {{ content | toc }}
         </div>
       </div>
     </div>

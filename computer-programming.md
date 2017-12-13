@@ -1,9 +1,9 @@
 ---
 layout: default
 title: Computer Programming
-description: ...
-group: software developer
 toc: true
+description: description
+group: software developer
 ---
 
 Computer Programming General

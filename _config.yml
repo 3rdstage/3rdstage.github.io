@@ -29,5 +29,6 @@ exclude:
   - Gemfile
   - README.md
 
-gems:
+plugins:
+  - jekyll-toc
   - jekyll-sitemap
