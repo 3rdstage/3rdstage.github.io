@@ -6,3 +6,13 @@
 <!-- Optional JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script>
+/*
+ * refer https://stackoverflow.com/questions/23870330/twitter-bootstrap-3-navbar-changes-width-when-affix-fires
+ */
+$(function() {
+  $(".nav.nav-pills.nav-stacked.affix").outerWidth($(".nav.nav-pills.nav-stacked.affix").parent().outerWidth());
+  $(".affix").css("width", $(".nav.nav-pills.nav-stacked.affix").parent().outerWidth());
+});
+</script>
