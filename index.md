@@ -6,8 +6,7 @@ group: software developer
 toc: true
 ---
 
-- [Computer Programming](computer-programming.md)
-- [Platforms, Frameworks, Libraries and Tools](framworks-libraries.md)
-- [Simple Patterns and Typical Samples](patterns-and-samples.md)
-- [On UNIX and Linux](on-linux-and-unix.md)
-
+- [Computer Programming]({{ site.baseurl }}{% link pages/computer-programming.md %})
+- [Platforms, Frameworks, Libraries and Tools]({{ site.baseurl }}{% link pages/framworks-libraries.md %})
+- [Simple Patterns and Typical Samples]({{ site.baseurl }}{% link pages/patterns-and-samples.md %})
+- [On UNIX and Linux]({{ site.baseurl }}{% link pages/on-linux-and-unix.md %})

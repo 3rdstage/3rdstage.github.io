@@ -69,6 +69,7 @@ div.numbered h4{
   counter-reset:level-4-no;
   font-size: 115%;
   font-weight: bold;
+  margin: 1.0em 0px 0.5em 0px;
 }
 
 div.numbered h5:before{
@@ -84,7 +85,7 @@ div.numbered h5{
 div.numbered h6:before{
   content:counter(level-1-no) "." counter(level-2-no) "." counter(level-3-no) "." counter(level-4-no) "." counter(level-5-no) ". ";
   counter-increment:level-5-no;
-  font-size: 100%;
+  font-size: 105%;
 }
 
 /*

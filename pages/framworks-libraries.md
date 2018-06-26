@@ -1,8 +1,7 @@
 ---
 layout: default
 title: Platforms, Frameworks, Libraries and Tools
-description: ...
-group: software developer
+category: software developer
 toc: true
 ---
 

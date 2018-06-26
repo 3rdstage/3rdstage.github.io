@@ -13,6 +13,13 @@
  */
 $(function() {
   $(".nav.nav-pills.nav-stacked.affix").outerWidth($(".nav.nav-pills.nav-stacked.affix").parent().outerWidth());
-  $(".affix").css("width", $(".nav.nav-pills.nav-stacked.affix").parent().outerWidth());
+  //$(".affix").css("width", $(".nav.nav-pills.nav-stacked.affix").parent().outerWidth());
+
+  $('#sidemenu').affix({
+    top: 0,
+    bottom: 800
+
+  })
+
 });
 </script>

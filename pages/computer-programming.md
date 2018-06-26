@@ -1,18 +1,17 @@
 ---
 layout: default
 title: Computer Programming
+category: software developer
 toc: true
-description: description
-group: software developer
 ---
 
 Computer Programming General
 ------------------------------------
 
--   [Type System](http://en.wikipedia.org/wiki/Type_system) (Wikipedia)
-    -   [Strong and weak typing](http://en.wikipedia.org/wiki/Strong_and_weak_typing)
-    -   [Type conversion](http://en.wikipedia.org/wiki/Type_conversion)
--   [Overview of Graphs](http://projects.gnome.org/gnumeric/doc/sect-graphs-overview.shtml)
+- [Type System](http://en.wikipedia.org/wiki/Type_system) (Wikipedia)
+    - [Strong and weak typing](http://en.wikipedia.org/wiki/Strong_and_weak_typing)
+    - [Type conversion](http://en.wikipedia.org/wiki/Type_conversion)
+- [Overview of Graphs](http://projects.gnome.org/gnumeric/doc/sect-graphs-overview.shtml)
 -   [Canonical form](http://en.wikipedia.org/wiki/Canonical_form)
 -   [Closure](http://en.wikipedia.org/wiki/Closure_(computer_science)) (Wikipedia)
     -   [First-class function](http://en.wikipedia.org/wiki/First-class_function)
@@ -288,7 +287,7 @@ Java SE
     -   [`addShutdownHook(Thread hook)` method](http://docs.oracle.com/javase/7/docs/api/java/lang/Runtime.html#addShutdownHook(java.lang.Thread))
 -   [`javax.annotation` package API](http://jsr-305.googlecode.com/svn/trunk/javadoc/index.html)
 -   [`javax.validation` package API](http://docs.jboss.org/hibernate/beanvalidation/spec/1.1/api/)
--   [`java.util.Optional`<T> API](http://docs.oracle.com/javase/8/docs/api/index.html?java/util/Optional.html) (since 1.8)
+- [`java.util.Optional`<T> API](http://docs.oracle.com/javase/8/docs/api/index.html?java/util/Optional.html)  (since 1.8)
 
 <!-- -->
 
@@ -532,7 +531,7 @@ Java SE
 <!-- -->
 
 -   [Immutable Collections Explained](https://github.com/google/guava/wiki/ImmutableCollectionsExplained)
-    -   [`com.google.common.collect.ImmutableList`<E> API](https://google.github.io/guava/releases/snapshot/api/docs/index.html?com/google/common/collect/ImmutableList.html)
+    -   [`com.google.common.collect.ImmutableList <E>` API](https://google.github.io/guava/releases/snapshot/api/docs/index.html?com/google/common/collect/ImmutableList.html)
     -   [`com.google.common.collect.ImmutableMap`<K,V> API](https://google.github.io/guava/releases/snapshot/api/docs/index.html?com/google/common/collect/ImmutableMap.html)
     -   [`com.google.common.collect.ImmutableMultimap`<K,V> API](https://google.github.io/guava/releases/snapshot/api/docs/index.html?com/google/common/collect/ImmutableMultimap.html)
     -   [`com.google.common.collect.ImmutableSet`<E> API](https://google.github.io/guava/releases/snapshot/api/docs/index.html?com/google/common/collect/ImmutableSet.html)

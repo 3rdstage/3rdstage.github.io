@@ -1,20 +1,32 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    {% include header.html %}
-  </head>
-  <body>
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-3 col-md-3 col-xl-2">
-          {% include sidebar.html %}
-        </nav>
-        <div class="col-12 col-md-9 col-xl-8 content numbered" role="main">
-        {{ content | toc }}
-        </div>
-      </div>
-    </div>
+<head>
+{% include header.html %}
 
-    {% include scripts.html %}
-  </body>
+<style>
+#sidebar {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  padding: 8px 0;
+}
+
+.content {
+    margin-left: 140px; /* Same width as the sidebar + left position in px */
+    padding: 0px 10px;
+}
+</style>
+</head>
+<body>
+  <div id="sidebar">
+  {% include sidebar.html %}
+  </div>
+  <div class="content numbered">
+  {{ content | toc }}
+  </div>
+
+{% include scripts.html %}
+</body>
 </html>

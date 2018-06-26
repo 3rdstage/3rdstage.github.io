@@ -1,8 +1,7 @@
 ---
 layout: default
 title: On Linux and UNIX
-description: ...
-group: software developer
+category: software developer
 toc: true
 ---
 

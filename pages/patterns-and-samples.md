@@ -1,8 +1,7 @@
 ---
 layout: default
 title: Simple Patterns and Typical Samples
-description: ...
-group: software developer
+category: software developer
 toc: true
 ---
 
