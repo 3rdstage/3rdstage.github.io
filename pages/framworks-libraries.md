@@ -293,7 +293,7 @@ Tools
 
 -   [Process supervision software and tools](http://en.wikipedia.org/wiki/Process_supervision)
 
-#### nmon
+#### `nmon`
 
 -   <http://www.ibm.com/developerworks/wikis/display/WikiPtype/nmon>
 -   Desc. : free tool giving you a huge amount of important performance information in one go.
