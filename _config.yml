@@ -10,12 +10,13 @@ description:        "Wiki of Sangmoon Oh"
 authors:            "Sangmoon Oh"
 
 markdown : kramdown
-# highlighter: rouge
+highlighter: rouge
 
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-#  auto_ids:     true
+  auto_ids: true
+  toc_levels: 1..3
 
 encoding: utf-8
 exclude:
