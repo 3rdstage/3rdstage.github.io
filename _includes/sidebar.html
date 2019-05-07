@@ -1,5 +1,5 @@
 <ul>
-{% for page in site.pages %}{% if page.category == 'software developer' %}
+{% for page in site.pages %}{% if page.category == 'software developer' or page.category == 'programming guideline' %}
 <li><a style="word-wrap:break-word" href='{{ page.url }}'>{{ page.title }}</a></li>
 {% endif %}{% endfor %}
 </ul>
