@@ -3,3 +3,10 @@ _site/
 .sass-cache
 .jekyll-metadata
 Gemfile.lock
+*.log
+*.bak
+.~*
+._*
+.cache*
+.*.swp
+*.md.html
