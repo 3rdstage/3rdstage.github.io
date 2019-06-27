@@ -639,6 +639,280 @@ function setDocumentScrollTop(ypos)
 
 </head>
 <body class="markdown-body">
-{&quot;message&quot;:&quot;API rate limit exceeded for 211.45.60.5. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;}
+<hr /> 
+<h2> <a id="layout-defaulttitle-rest-api-design-guidecategory-programming-guidelinetoc-true" class="anchor" href="#layout-defaulttitle-rest-api-design-guidecategory-programming-guidelinetoc-true" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>layout: default title: REST API Design Guide category: programming guideline toc: true</h2> 
+<h2> <a id="rest-api-design-guide" class="anchor" href="#rest-api-design-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>REST API Design Guide</h2> 
+<h3> <a id="common-guideline" class="anchor" href="#common-guideline" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common Guideline</h3> 
+<ul> 
+ <li>Use only JSON(<code>application/json</code>) for both for input and output body.</li> 
+ <li>Use HTTPS not HTTP.</li> 
+ <li>Prefer query parameters or template parameters and do NOT use matrix parameters or header parameters as possible.</li> 
+ <li>Avoid find all API</li> 
+ <li>Use only English for descriptions</li> 
+</ul> 
+<h3> <a id="common-concepts" class="anchor" href="#common-concepts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common Concepts</h3> 
+<h4> <a id="date-time-interval-duration" class="anchor" href="#date-time-interval-duration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Date, Time, Interval, Duration</h4> 
+<ul> 
+ <li> <p><a href="https://en.wikipedia.org/wiki/ISO_8601" rel="nofollow">ISO 8601</a></p> </li> 
+ <li> <p><a href="http://www.joda.org/joda-time/key.html" rel="nofollow">Joda-Time Key Concepts</a></p> </li> 
+ <li> <p><a href="https://mariadb.com/kb/en/sql-99/08-temporal-values/" rel="nofollow">SQL-99 Temporal Values</a></p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th>Concept</th> 
+     <th>Description</th> 
+     <th>Remarks</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td><strong>Date</strong></td> 
+     <td>Represents general exact full temporal point. Generally resolves from year upto second corresponding to '<code>yyyy-MM-dd HH:mm:ss</code>' format. Alias : Timestamp</td> 
+     <td></td> 
+    </tr> 
+    <tr> 
+     <td><strong>Time</strong></td> 
+     <td>Represents time only part. Generally resolves from hour upto second corresponding to '<code>HH:mm:ss</code>' format.</td> 
+     <td></td> 
+    </tr> 
+    <tr> 
+     <td><strong>Interval</strong></td> 
+     <td>Represents the intervening time between two temporal points. Includes explicit start point and/or end point. For open interval, one point can be excluded. Corresponds to '<code>yyyy-MM-dd HH:mm:ss ~ yyyy-MM-dd HH:mm:ss</code>' format.</td> 
+     <td><a href="https://en.wikipedia.org/wiki/ISO_8601#Time_intervals" rel="nofollow">ISO 8601 / Time Intervals</a></td> 
+    </tr> 
+    <tr> 
+     <td><strong>Duration</strong></td> 
+     <td>Represents the amount of intervening time in a temporal interval.</td> 
+     <td><a href="https://en.wikipedia.org/wiki/ISO_8601#Durations" rel="nofollow">ISO 8601 / Durations</a></td> 
+    </tr> 
+   </tbody> 
+  </table> </li> 
+</ul> 
+<h3> <a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h3> 
+<h4> <a id="user-service-example" class="anchor" href="#user-service-example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>User Service Example</h4> 
+<h5> <a id="rest-api" class="anchor" href="#rest-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>REST API</h5> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Title</th> 
+   <th>Method</th> 
+   <th>URL</th> 
+   <th>Body</th> 
+   <th>Return</th> 
+   <th>Remarks</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Add a user</td> 
+   <td>POST</td> 
+   <td><code>roll/v1/users</code></td> 
+   <td>User(id=null)</td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List all users</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users</code></td> 
+   <td></td> 
+   <td>User[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List all valid users</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users/valid</code></td> 
+   <td></td> 
+   <td>User[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List all invalid users</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users/invalid</code></td> 
+   <td></td> 
+   <td>User[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List users of a specific organization</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users?orgId={orgId}</code></td> 
+   <td></td> 
+   <td>User[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List valid users of a specified organization</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/valid?orgId={orgId}</code></td> 
+   <td></td> 
+   <td>User[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Find a user</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users/{userId}</code></td> 
+   <td></td> 
+   <td>User</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Update a user</td> 
+   <td>PUT</td> 
+   <td><code>roll/v1/users/{userId}</code></td> 
+   <td>User</td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Make a user valid</td> 
+   <td>PUT</td> 
+   <td><code>roll/v1/users/{userId}/valid</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Make a user invalid</td> 
+   <td>PUT</td> 
+   <td><code>roll/v1/users/{userId}/valid</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Update a user's password</td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Initialize a user's password</td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Get the hash of a user's password</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users/{userId}/password/sha256</code></td> 
+   <td></td> 
+   <td>{ &quot;hash&quot; : string }</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Add a user email address</td> 
+   <td>POST</td> 
+   <td><code>roll/v1/users/{userId}/emails</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List all email addresses of a specified user</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users/{userId}/emails</code></td> 
+   <td></td> 
+   <td>{ &quot;email&quot;: string, &quot;verified&quot;: boolean, &quot;verifiedAt&quot;: date }[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Set a user email address verified</td> 
+   <td>PUT</td> 
+   <td><code>roll/v1/users/{userId}/emails/{email}/verified</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Remove a user email address</td> 
+   <td>DELETE</td> 
+   <td><code>roll/v1/users/{userId}/emails/{email}</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Add a user phone number</td> 
+   <td>POST</td> 
+   <td><code>roll/v1/users/{userId}/phones</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List all phone numbers of a specified user</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/users/{userId}/phones</code></td> 
+   <td></td> 
+   <td>{ &quot;phone&quot;: string, &quot;verified&quot;: boolean, &quot;verifiedAt&quot;: date }[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Set a user phone number verified</td> 
+   <td>PUT</td> 
+   <td><code>roll/v1/users/{userId}/phones/{phoneNumber}/verified</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Remove a user phone number</td> 
+   <td>DELETE</td> 
+   <td><code>roll/v1/users/{userId}/phones/{phoneNumber}</code></td> 
+   <td></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Add a user preference</td> 
+   <td>POST</td> 
+   <td><code>roll/v1/users/{userId}/preference</code></td> 
+   <td>{ &quot;key&quot;: string, &quot;value&quot;: string }[]</td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List all common preference keys</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/common/PreferenceKeys</code></td> 
+   <td></td> 
+   <td>{ &quot;key&quot;: string, &quot;description&quot;: string }[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Add a organization</td> 
+   <td>POSt</td> 
+   <td><code>roll/v1/organizations</code></td> 
+   <td>Org</td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>List all organizations</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/organizations</code></td> 
+   <td></td> 
+   <td>Org[]</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Find an organization</td> 
+   <td>GET</td> 
+   <td><code>roll/v1/organizations/{orgId}</code></td> 
+   <td></td> 
+   <td>Org</td> 
+   <td></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h5> <a id="swagger-api" class="anchor" href="#swagger-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Swagger API</h5>
 </body>
 </html>

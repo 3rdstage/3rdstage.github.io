@@ -15,6 +15,23 @@ Server Application Programming Guide
 * Define collection type return should be non-null always. For no result, return empty collection.
 * Use `final` modifier actively for method parameters and local variables to improve code readability and safety.
 
+### Naming Convention
+
+   | Category | Item | Name Pattern | Samples | Remarks |
+   | -------- | ---- | ------------ | ------- | ------- |
+   | Class    | Spring Controller Class | `~Controller` | UserController, ActivityController, RewardController |   |
+   |          | Spring Service Class    | `~Service`    |                                                      |   |
+   |          | MyBatis Mapper Class    | `~Mapper`     |                                                      |   |
+   |          | MyBatis SQL Map         | `~Mapper.xml` |                                                      |   |
+   | Controller Method | Finding/Listing Method | `findSubjectById` | findUserById                |   |
+   |                   |                        | `findSubjectsByCategory` | findRewardsByUser    |   | 
+   |                   |                        | `findSubjectsWithInterval` |                    |   |
+   |                   | Creation Method        | `addSubject`               |                    |   |
+   |                   | Update   Method        | `updateSubject`            |                    |   |
+   |                   | Updating Single Proprety | `setPropertyOfSubject`   |                    |   |
+   |                   | Deletion Method        | `removeSubject(s)`         |                    |   |
+    
+
 ### Controller Programming Guide
 
 #### Class Level
@@ -67,7 +84,10 @@ public class ActivityController{
 
     | Annotation | Guideline |
     | ---------- | --------- |
-    | `@RequestMapping` | Add method element for HTTP method(`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) explicitly. |
+    | `@PostMapping`    | For creation type methods |
+    | `@GetMapping`     | For listing or finding type methods |
+    | `@PutMapping`     | For updating type methods |
+    | `@DeleteMapping`  | For removing type methods |
     | `@ApiOperation`   | Add value element for Swagger API description explicitly. For non-administrative operation, add authorizations element explicitly. |
     | `@Nonnull` or `@Nullable` | The nullability of return should be defined explicitly. The throwable exceptions and return nullability considered together. |
     
