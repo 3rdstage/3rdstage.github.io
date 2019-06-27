@@ -639,6 +639,297 @@ function setDocumentScrollTop(ypos)
 
 </head>
 <body class="markdown-body">
-{&quot;message&quot;:&quot;API rate limit exceeded for 211.45.60.5. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)&quot;,&quot;documentation_url&quot;:&quot;https://developer.github.com/v3/#rate-limiting&quot;}
+<hr /> 
+<h2> <a id="layout-defaulttitle-server-application-programming-guidecategory-programming-guidelinetoc-true" class="anchor" href="#layout-defaulttitle-server-application-programming-guidecategory-programming-guidelinetoc-true" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>layout: default title: Server Application Programming Guide category: programming guideline toc: true</h2> 
+<h2> <a id="server-application-programming-guide" class="anchor" href="#server-application-programming-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Server Application Programming Guide</h2> 
+<h3> <a id="common-guideline" class="anchor" href="#common-guideline" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common Guideline</h3> 
+<ul> 
+ <li>Use English for Java API documentation (Javadoc comment) and comments as possible.</li> 
+ <li>Use annotations actively.</li> 
+ <li>Define collection type return should be non-null always. For no result, return empty collection.</li> 
+ <li>Use <code>final</code> modifier actively for method parameters and local variables to improve code readability and safety.</li> 
+</ul> 
+<h3> <a id="naming-convention" class="anchor" href="#naming-convention" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Naming Convention</h3> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Category</th> 
+   <th>Item</th> 
+   <th>Name Pattern</th> 
+   <th>Samples</th> 
+   <th>Remarks</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Class</td> 
+   <td>Spring Controller Class</td> 
+   <td><code>~Controller</code></td> 
+   <td>UserController, ActivityController, RewardController</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>Spring Service Class</td> 
+   <td><code>~Service</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>MyBatis Mapper Class</td> 
+   <td><code>~Mapper</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>MyBatis SQL Map</td> 
+   <td><code>~Mapper.xml</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td>Controller Method</td> 
+   <td>Finding/Listing Method</td> 
+   <td><code>findSubjectById</code></td> 
+   <td>findUserById</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td></td> 
+   <td><code>findSubjectsByCategory</code></td> 
+   <td>findRewardsByUser</td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td></td> 
+   <td><code>findSubjectsWithInterval</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>Creation Method</td> 
+   <td><code>addSubject</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>Update Method</td> 
+   <td><code>updateSubject</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>Updating Single Proprety</td> 
+   <td><code>setPropertyOfSubject</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+  <tr> 
+   <td></td> 
+   <td>Deletion Method</td> 
+   <td><code>removeSubject(s)</code></td> 
+   <td></td> 
+   <td></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h3> <a id="controller-programming-guide" class="anchor" href="#controller-programming-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Controller Programming Guide</h3> 
+<h4> <a id="class-level" class="anchor" href="#class-level" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Class Level</h4> 
+<ul> 
+ <li> <p>Define one controller per resource as possible.</p> </li> 
+ <li> <p>Name with <code>Controller</code> postfix.</p> 
+  <ul> 
+   <li>For example. <code>UserController</code>, <code>ActivityController</code>, <code>ActivityTypeController</code>, <code>CircleController</code> </li> 
+  </ul> </li> 
+ <li> <p>Define following annotations explicitly.</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th>Annotation</th> 
+     <th>Guideline</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td><code>@RestController</code></td> 
+     <td></td> 
+    </tr> 
+    <tr> 
+     <td><code>@RequestMapping</code></td> 
+     <td>Define base path for this controller and MIME type explicitly.</td> 
+    </tr> 
+    <tr> 
+     <td><code>@Api</code></td> 
+     <td>For Swagger API documentation. <br />Define class level base authorization requirement (usually administrative one) together.</td> 
+    </tr> 
+    <tr> 
+     <td><code>@ParametersAreNonnullByDefault</code></td> 
+     <td>This annoation for just API documentation but not runtime automatic checking.</td> 
+    </tr> 
+    <tr> 
+     <td><code>@ThreadSafe</code></td> 
+     <td>Controllers are always supposed to be thread-safe without exceptional cases.</td> 
+    </tr> 
+   </tbody> 
+  </table> </li> 
+ <li> <p>Define the limits for page size or recent count as constants(<code>public final static</code> field).</p> </li> 
+ <li> <p>Sample</p> 
+  <div class="highlight highlight-source-java">
+   <pre></pre>
+  </div> </li> 
+</ul> 
+<p>@RestController @RequestMapping(value = &quot;/activities&quot;, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}) @Api(value = &quot;Activity&quot;, authorizations = { @Authorization( value = &quot;defaultAuth&quot;, scopes = { @AuthorizationScope(scope = &quot;admin&quot;, description = &quot;&quot;) }) }) @ParametersAreNonnullByDefault @ThreadSafe public class ActivityController{</p> 
+<p>public static final int PAGE_SIZE_MAX = 100; public static final int PAGE_SIZE_MIN = 5; public static final String RECENT_COUNT_DEFAULT_STRING = &quot;5&quot;; public static final int RECENT_COUNT_MAX = Constants.RECENT_COUNT_GLOBAL_MAX; ~~~</p> 
+<h4> <a id="method-level" class="anchor" href="#method-level" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Method Level</h4> 
+<ul> 
+ <li> <p>Name with following convention.</p> </li> 
+ <li> <p>Define following annotations explicitly.</p> 
+  <table> 
+   <thead> 
+    <tr> 
+     <th>Annotation</th> 
+     <th>Guideline</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr> 
+     <td><code>@PostMapping</code></td> 
+     <td>For creation type methods</td> 
+    </tr> 
+    <tr> 
+     <td><code>@GetMapping</code></td> 
+     <td>For listing or finding type methods</td> 
+    </tr> 
+    <tr> 
+     <td><code>@PutMapping</code></td> 
+     <td>For updating type methods</td> 
+    </tr> 
+    <tr> 
+     <td><code>@DeleteMapping</code></td> 
+     <td>For removing type methods</td> 
+    </tr> 
+    <tr> 
+     <td><code>@ApiOperation</code></td> 
+     <td>Add value element for Swagger API description explicitly. For non-administrative operation, add authorizations element explicitly.</td> 
+    </tr> 
+    <tr> 
+     <td> <code>@Nonnull</code> or <code>@Nullable</code> </td> 
+     <td>The nullability of return should be defined explicitly. The throwable exceptions and return nullability considered together.</td> 
+    </tr> 
+   </tbody> 
+  </table> </li> 
+ <li> <p>Use properly common model types such as <code>Count</code>, <code>Id</code>, <code>Value&lt;T&gt;</code> especially for return.</p> </li> 
+</ul> 
+<h5> <a id="find-method" class="anchor" href="#find-method" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Find Method</h5> 
+<ul> 
+ <li> <p>Define singular fetch operation using resource identifier in the first place explicitly.</p> </li> 
+ <li> <p>Definitely prefer paging</p> 
+  <ul> 
+   <li> <p>For normal resource (not code type resource), listing (collective fetch) operation should always be pagenated.</p> </li> 
+   <li> <p>For normal resource, don't define &quot;listing all&quot; operation.</p> 
+    <ul> 
+     <li>For code type resource (such as <code>ActivityType</code>, <code>RewardType</code>), define &quot;listing all&quot; operation 'cause mostly those resources are less than 100.</li> 
+    </ul> </li> 
+   <li> <p>Don't include paging related word in method name 'cause paging is implicit in most cases.</p> </li> 
+   <li> <p>Use <code>page-no</code> and <code>page-size</code> pair instead of <code>start-no</code> and <code>end-no</code> pair as paging parameters.</p> </li> 
+   <li> <p>Define <code>page-size</code> parameter optional and provide default page size per controller or per resource type as a controller constant.</p> </li> 
+   <li> <p>Define accompanying counting operation for each listing opeation</p> 
+    <ul> 
+     <li> <code>findActivitiesWithInterval</code> / <code>countActivitiesWithInterval</code> </li> 
+     <li> <code>findActivitiesByUserWithInterval</code> / <code>countActivitiesWithInterval</code> </li> 
+     <li> <code>findActivitiesByUserAndType</code> / <code>countActivitiesByUserAndType</code> </li> 
+    </ul> </li> 
+   <li> <p>Name path for counting operation to end with <code>/count</code></p> 
+    <ul> 
+     <li><code>/activities/count</code></li> 
+     <li><code>/activities/belongTo/{userId}/count</code></li> 
+     <li><code>/activities/belongTo/{userId}/typed/{activityTypeCode}/count</code></li> 
+    </ul> </li> 
+  </ul> </li> 
+ <li> <p>Use <code>belongTo/{userId}</code> path element for per-user listing operation</p> 
+  <ul> 
+   <li>Don't use preceding <code>/users/{userId}</code> path element (such as <code>/users/{userId}/activities</code>, <code>/users/{userId}/rewards</code>).</li> 
+  </ul> </li> 
+ <li> <p>Define sort of listing operation using sort query parameter.</p> </li> 
+ <li> <p>Sample</p> 
+  <div class="highlight highlight-source-java">
+   <pre><span class="pl-k">@RequestMapping</span>(<span class="pl-c1">method</span> <span class="pl-k">=</span> <span class="pl-smi">RequestMethod</span><span class="pl-c1"><span class="pl-k">.</span>GET</span>, <span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>/{activityId}<span class="pl-pds">&quot;</span></span>)
+<span class="pl-k">@ApiOperation</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Find the specified activity<span class="pl-pds">&quot;</span></span>,
+<span class="pl-c1">authorizations</span> <span class="pl-k">=</span> {
+    <span class="pl-k">@Authorization</span>(
+      <span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>defaultAuth<span class="pl-pds">&quot;</span></span>,
+      <span class="pl-c1">scopes</span> <span class="pl-k">=</span> {
+          <span class="pl-k">@AuthorizationScope</span>(<span class="pl-c1">scope</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>member<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">description</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pds">&quot;</span></span>)
+      })
+})
+<span class="pl-k">@Nullable</span>
+<span class="pl-k">public</span> <span class="pl-smi">Activity</span> findActivityById(<span class="pl-k">@PathVariable</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>activityId<span class="pl-pds">&quot;</span></span>) <span class="pl-k">final</span> <span class="pl-smi">String</span> id){
+<span class="pl-c1">...</span>
+}
+<span class="pl-k">@RequestMapping</span>(<span class="pl-c1">method</span> <span class="pl-k">=</span> <span class="pl-smi">RequestMethod</span><span class="pl-c1"><span class="pl-k">.</span>GET</span>, <span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>/belongTo/{userId}/count<span class="pl-pds">&quot;</span></span>)
+<span class="pl-k">@ApiOperation</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>Count activities for a user within the specified interval<span class="pl-pds">&quot;</span></span>,
+<span class="pl-c1">authorizations</span> <span class="pl-k">=</span> {
+    <span class="pl-k">@Authorization</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>defaultAuth<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">scopes</span> <span class="pl-k">=</span> {
+        <span class="pl-k">@AuthorizationScope</span>(<span class="pl-c1">scope</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>member<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">description</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pds">&quot;</span></span>)
+    })
+})
+<span class="pl-k">@Nonnull</span>
+<span class="pl-k">public</span> <span class="pl-smi">Count</span> countActivitiesByUserWithInterval(
+<span class="pl-k">@PathVariable</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>userId<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the user who owns the found activities<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> userId,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>start<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the start date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> start,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>end<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the end date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> end){
+<span class="pl-c1">...</span>
+}
+<span class="pl-k">@RequestMapping</span>(<span class="pl-c1">method</span> <span class="pl-k">=</span> <span class="pl-smi">RequestMethod</span><span class="pl-c1"><span class="pl-k">.</span>GET</span>, <span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>/belongTo/{userId}<span class="pl-pds">&quot;</span></span>)
+<span class="pl-k">@ApiOperation</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>List activities for a user within the specified interval in page<span class="pl-pds">&quot;</span></span>,
+<span class="pl-c1">authorizations</span> <span class="pl-k">=</span> {
+    <span class="pl-k">@Authorization</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>defaultAuth<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">scopes</span> <span class="pl-k">=</span> {
+        <span class="pl-k">@AuthorizationScope</span>(<span class="pl-c1">scope</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>member<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">description</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span><span class="pl-pds">&quot;</span></span>)
+    })
+})
+<span class="pl-k">@Nonnull</span>
+<span class="pl-k">public</span> <span class="pl-k">List&lt;<span class="pl-smi">Activity</span>&gt;</span> findActivitiesByUserWithInterval(
+<span class="pl-k">@PathVariable</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>userId<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@Size</span>(<span class="pl-c1">max</span> <span class="pl-k">=</span> <span class="pl-c1">100</span>) <span class="pl-k">@Pattern</span>(<span class="pl-c1">regexp</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>[a-z]*<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> userId,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>start<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the start date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> start,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>end<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the end date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> end,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>pageNo<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the page to fetch<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@Min</span>(<span class="pl-c1">1</span>) <span class="pl-k">int</span> pageNo,
+<span class="pl-k">@RequestParam</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>pageSize<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">required</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">defaultValue</span> <span class="pl-k">=</span> <span class="pl-c1">PAGE_SIZE_DEFAULT_STRING</span>) <span class="pl-k">@ApiParam</span>(
+  <span class="pl-c1">defaultValue</span> <span class="pl-k">=</span> <span class="pl-c1">PAGE_SIZE_DEFAULT_STRING</span>,
+  <span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>the size of page<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@Min</span>(<span class="pl-c1">PAGE_SIZE_MIN</span>) <span class="pl-k">@Max</span>(<span class="pl-c1">PAGE_SIZE_MAX</span>) <span class="pl-k">int</span> pageSize){
+<span class="pl-smi">Validator</span><span class="pl-k">.</span>validate(<span class="pl-smi">StringUtils</span><span class="pl-k">.</span>isNotEmpty(userId), <span class="pl-s"><span class="pl-pds">&quot;</span>msg.user.unspecified<span class="pl-pds">&quot;</span></span>, userId);
+<span class="pl-smi">Validator</span><span class="pl-k">.</span>validateInterval(start, end);
+<span class="pl-smi">Validator</span><span class="pl-k">.</span>validatePageSpec(pageNo, pageSize, <span class="pl-c1">PAGE_SIZE_MIN</span>, <span class="pl-c1">PAGE_SIZE_MAX</span>);
+<span class="pl-c1">...</span>
+}
+<span class="pl-k">@RequestMapping</span>(<span class="pl-c1">method</span> <span class="pl-k">=</span> <span class="pl-smi">RequestMethod</span><span class="pl-c1"><span class="pl-k">.</span>GET</span>, <span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>/count<span class="pl-pds">&quot;</span></span>)
+<span class="pl-k">@ApiOperation</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>List activities within the specified interval<span class="pl-pds">&quot;</span></span>)
+<span class="pl-k">@Nonnull</span>
+<span class="pl-k">public</span> <span class="pl-smi">Count</span> countActivitiesWithInterval(
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>start<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the start date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> start,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>end<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the end date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> end){
+
+<span class="pl-c1">...</span>
+}
+<span class="pl-k">@RequestMapping</span>(<span class="pl-c1">method</span> <span class="pl-k">=</span> <span class="pl-smi">RequestMethod</span><span class="pl-c1"><span class="pl-k">.</span>GET</span>)
+<span class="pl-k">@ApiOperation</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>List activities within the specified interval<span class="pl-pds">&quot;</span></span>)
+<span class="pl-k">@Nonnull</span>
+<span class="pl-k">public</span> <span class="pl-k">List&lt;<span class="pl-smi">Activity</span>&gt;</span> findActivitiesWithInterval(
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>start<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the start date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> start,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>end<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the end date of interval in 'yyyyMMddHHmmss' format<span class="pl-pds">&quot;</span></span>) <span class="pl-smi">String</span> end,
+<span class="pl-k">@RequestParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>pageNo<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@ApiParam</span>(<span class="pl-s"><span class="pl-pds">&quot;</span>the page to fetch<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@Min</span>(<span class="pl-c1">1</span>) <span class="pl-k">int</span> pageNo,
+<span class="pl-k">@RequestParam</span>(<span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>pageSize<span class="pl-pds">&quot;</span></span>, <span class="pl-c1">required</span> <span class="pl-k">=</span> <span class="pl-c1">false</span>, <span class="pl-c1">defaultValue</span> <span class="pl-k">=</span> <span class="pl-c1">PAGE_SIZE_DEFAULT_STRING</span>) <span class="pl-k">@ApiParam</span>(
+  <span class="pl-c1">defaultValue</span> <span class="pl-k">=</span> <span class="pl-c1">PAGE_SIZE_DEFAULT_STRING</span>,
+  <span class="pl-c1">value</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">&quot;</span>the size of page<span class="pl-pds">&quot;</span></span>) <span class="pl-k">@Min</span>(<span class="pl-c1">PAGE_SIZE_MIN</span>) <span class="pl-k">@Max</span>(<span class="pl-c1">PAGE_SIZE_MAX</span>) <span class="pl-k">int</span> pageSize){
+<span class="pl-c1">...</span>
+}</pre>
+  </div> </li> 
+</ul>
 </body>
 </html>
