@@ -5,3 +5,9 @@ _site/
 .jekyll-metadata
 Gemfile.lock
 *.md.html
+*.log
+*.bak
+.~*
+._*
+.cache*
+.*.swp
