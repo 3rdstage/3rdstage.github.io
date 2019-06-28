@@ -4,7 +4,7 @@ _site/
 .sass-cache
 .jekyll-metadata
 Gemfile.lock
-/**/*.md.html
+*.md.html
 *.log
 *.bak
 .~*
