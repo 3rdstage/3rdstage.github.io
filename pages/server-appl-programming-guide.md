@@ -19,17 +19,18 @@ Server Application Programming Guide
 
    | Category | Item | Name Pattern | Samples | Remarks |
    | -------- | ---- | ------------ | ------- | ------- |
-   | Class    | Spring Controller Class | <tt>*Subejct*Controller</tt>  | UserController, ActivityController, RewardController |   |
-   |          | Spring Service Class    | <tt>*Subject*Service</tt>    |                                                      |   |
-   |          | MyBatis Mapper Class    | <tt>*Subject*Mapper</tt>     |                                                      |   |
-   |          | MyBatis SQL Map         | <tt>*Subject*Mapper.xml</tt> |                                                      |   |
-   | Controller Method | Finding/Listing Method | `findSubjectById` | findUserById                |   |
-   |                   |                        | `findSubjectsByCategory` | findRewardsByUser    |   | 
-   |                   |                        | `findSubjectsWithInterval` |                    |   |
-   |                   | Creation Method        | `addSubject`               |                    |   |
-   |                   | Update   Method        | `updateSubject`            |                    |   |
-   |                   | Updating Single Proprety | `setPropertyOfSubject`   |                    |   |
-   |                   | Deletion Method        | `removeSubject(s)`         |                    |   |
+   | Class    | Spring Controller Class | <tt>*Subejct***Controller**</tt>  | UserController, ActivityController, RewardController |   |
+   |          | Spring Service Class    | <tt>*Subject***Service**</tt>    |   |   |
+   |          | MyBatis Mapper Class    | <tt>*Subject***Mapper**</tt>     |   |   |
+   |          | MyBatis SQL Map         | <tt>*Subject***Mapper.xml**</tt> |   |   |
+   | Controller Method | Finding/Listing Method | <tt>**find***Subject***ById**</tt> | findUserById |   |
+   |                   |                        | <tt>**find***Subjects***By***Category*</tt> | findRewardsByUser |   | 
+   |                   |                        | <tt>**find***Subjects***WithInterval**</tt> |   |   |
+   |                   |                        | <tt>**find***Subjects***WithCondition**</tt> |   |   |
+   |                   | Creation Method        | <tt>**add***Subject*</tt>  |   |   |
+   |                   | Update   Method        | <tt>**update***Subject*</tt> |   |   |
+   |                   | Updating Single Proprety | <tt>**set***Property***Of***Subject*</tt>   |   |   |
+   |                   | Deletion Method        | <tt>**remove***Subject*</tt> |   |   |
     
 
 ### Controller Programming Guide
