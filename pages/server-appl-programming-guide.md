@@ -19,10 +19,10 @@ Server Application Programming Guide
 
    | Category | Item | Name Pattern | Samples | Remarks |
    | -------- | ---- | ------------ | ------- | ------- |
-   | Class    | Spring Controller Class | `~Controller` | UserController, ActivityController, RewardController |   |
-   |          | Spring Service Class    | `~Service`    |                                                      |   |
-   |          | MyBatis Mapper Class    | `~Mapper`     |                                                      |   |
-   |          | MyBatis SQL Map         | `~Mapper.xml` |                                                      |   |
+   | Class    | Spring Controller Class | <tt>*Subejct*Controller</tt>  | UserController, ActivityController, RewardController |   |
+   |          | Spring Service Class    | <tt>*Subject*Service</tt>    |                                                      |   |
+   |          | MyBatis Mapper Class    | <tt>*Subject*Mapper</tt>     |                                                      |   |
+   |          | MyBatis SQL Map         | <tt>*Subject*Mapper.xml</tt> |                                                      |   |
    | Controller Method | Finding/Listing Method | `findSubjectById` | findUserById                |   |
    |                   |                        | `findSubjectsByCategory` | findRewardsByUser    |   | 
    |                   |                        | `findSubjectsWithInterval` |                    |   |
