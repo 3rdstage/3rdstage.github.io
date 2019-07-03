@@ -16,6 +16,20 @@ REST API Design Guide
 * Avoid find all API
 * Use only English for descriptions
 
+#### References
+
+* [Representational state transfer (on Wikipedia)](https://en.wikipedia.org/wiki/Representational_state_transfer)
+* [Google Cloud APIs API Design Guide](https://cloud.google.com/apis/design/)
+* [Microsoft REST API Guidelines](https://github.com/microsoft/api-guidelines)
+* [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
+* [Understanding REST Parameters](https://www.soapui.org/rest-testing/understanding-rest-parameters.html)
+* [REST API Syntax](https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax)
+
+* [Gmail API Reference](https://developers.google.com/gmail/api/v1/reference/)
+* [Twitter REST APIs](https://developer.twitter.com/en/docs)
+* [Instagram APIs](https://www.instagram.com/developer/endpoints/)
+* [GitHub API v3](https://developer.github.com/v3/)
+
 ### Common Concepts
 
 #### Date, Time, Interval, Duration
