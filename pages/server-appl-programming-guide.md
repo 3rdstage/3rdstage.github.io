@@ -24,14 +24,14 @@ Server Application Programming Guide
    |          | MyBatis Mapper Class    | <tt>*Subject***Mapper**</tt>     |   |   |
    |          | MyBatis SQL Map         | <tt>*Subject***Mapper.xml**</tt> |   |   |
    | Controller Method | Finding/Listing Method | <tt>**find***Subject***ById**</tt> | findUserById |   |
-   |                   |                        | <tt>**find***Subjects***By***Category*</tt> | findRewardsByUser |   | 
+   |                   |                        | <tt>**find***Subjects***By***Category*</tt> | findRewardsByUser |   |
    |                   |                        | <tt>**find***Subjects***WithInterval**</tt> |   |   |
    |                   |                        | <tt>**find***Subjects***WithCondition**</tt> |   |   |
    |                   | Creation Method        | <tt>**add***Subject*</tt>  |   |   |
    |                   | Update   Method        | <tt>**update***Subject*</tt> |   |   |
    |                   | Updating Single Proprety | <tt>**set***Property***Of***Subject*</tt>   |   |   |
    |                   | Deletion Method        | <tt>**remove***Subject*</tt> |   |   |
-    
+
 
 ### Controller Programming Guide
 
@@ -40,7 +40,7 @@ Server Application Programming Guide
 * Define one controller per resource as possible.
 * Name with `Controller` postfix.
     * For example. `UserController`, `ActivityController`, `ActivityTypeController`, `CircleController`
-    
+
 * Define following annotations explicitly.
 
     | Annotation | Guideline |
@@ -49,7 +49,7 @@ Server Application Programming Guide
     | `@RequestMapping` | Define base path for this controller and MIME type explicitly. |
     | `@Api`            | For Swagger API documentation. <br>Define class level base authorization requirement (usually administrative one) together. |
     | `@ParametersAreNonnullByDefault` | This annoation for just API documentation but not runtime automatic checking. |
-    | `@ThreadSafe`     | Controllers are always supposed to be thread-safe without exceptional cases. | 
+    | `@ThreadSafe`     | Controllers are always supposed to be thread-safe without exceptional cases. |
 
 * Define the limits for page size or recent count as constants(`public final static` field).
 
@@ -70,13 +70,13 @@ Server Application Programming Guide
 @ParametersAreNonnullByDefault
 @ThreadSafe
 public class ActivityController{
- 
+
   public static final int PAGE_SIZE_MAX = 100;
   public static final int PAGE_SIZE_MIN = 5;
   public static final String RECENT_COUNT_DEFAULT_STRING = "5";
   public static final int RECENT_COUNT_MAX = Constants.RECENT_COUNT_GLOBAL_MAX;
     ~~~
-    
+
 #### Method Level
 
 * Name with following convention.
@@ -91,7 +91,7 @@ public class ActivityController{
     | `@DeleteMapping`  | For removing type methods |
     | `@ApiOperation`   | Add value element for Swagger API description explicitly. For non-administrative operation, add authorizations element explicitly. |
     | `@Nonnull` or `@Nullable` | The nullability of return should be defined explicitly. The throwable exceptions and return nullability considered together. |
-    
+
 * Use properly common model types such as `Count`, `Id`, `Value<T>` especially for return.
 
 ##### Find Method
@@ -114,7 +114,7 @@ public class ActivityController{
         * `/activities/count`
         * `/activities/belongTo/{userId}/count`
         * `/activities/belongTo/{userId}/typed/{activityTypeCode}/count`
-        
+
 * Use `belongTo/{userId}` path element for per-user listing operation
     * Don't use preceding `/users/{userId}` path element (such as `/users/{userId}/activities`, `/users/{userId}/rewards`).
 
@@ -191,5 +191,22 @@ public class ActivityController{
       value = "the size of page") @Min(PAGE_SIZE_MIN) @Max(PAGE_SIZE_MAX) int pageSize){
     ...
   }
-    ~~~    
-    
+    ~~~
+
+### TODO
+
+#### Contents to add
+
+* Using OpenAPI spec 3.0
+
+* Accessing HTTP request header and HTTP sessionn in controller
+
+* Handling invalid input
+    * `Controller`
+        * throw `IllegalArgumentException`
+        * may use `Validate.isTrue()` method
+    * `Service` and `Repository`
+        * throw `IllegalStateException`
+        * may use `Validate.validState()` method
+
+* Applying polymorphism for request body or response body using OpenAPI 3.0

@@ -235,6 +235,12 @@ metainformation. |
 
 ### Examples
 
+#### Well-Known Examples
+
+  | API | Title | Link | Remarks |
+  | --- | ----- | ---- | ------- |
+  | `GET /users/self/` | Get information about the owner of access token. | [Instagram User Endpoints](https://www.instagram.com/developer/endpoints/users/) |
+
 #### User Service Example
 
 ##### REST API
