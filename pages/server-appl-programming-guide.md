@@ -33,6 +33,11 @@ Server Application Programming Guide
    |                   | Deletion Method        | <tt>**remove***Subject*</tt> |   |   |
 
 
+#### Logging Method
+
+* For controller public method, log starting and ending at `INFO` level
+
+
 ### Controller Programming Guide
 
 #### Class Level
@@ -210,3 +215,25 @@ public class ActivityController{
         * may use `Validate.validState()` method
 
 * Applying polymorphism for request body or response body using OpenAPI 3.0
+
+* Applying positive and guidance style than negative one for input validation error message
+
+    | Negative Style | Guidance Style |
+    | -------------- | -------------- |
+    | "Naming is missing" | "You should specify valid 'name'" |
+    | "Oder date is wrong or missing"  | "Order date should be future date(after now)" |
+    | "The number of ordered items is too large" | "The number of ordered items should be between 1 and 5" |
+
+* Adapting "_" on URL for all resource IDs.
+    * `GET /orders/_/canceled` : Find all canceled orders
+
+* Adapting "do-*" on URL for command.
+    * `PUT /customers/{customer-id}/orders/do-verify` : Verify orders of the specified customer
+
+* Naming pattern for value object.
+    * `~Value`, `~Base`, `~Req`, `~Resp`, `~Result`, `~Ref`
+
+* Naming pattern for enum class.
+    * `~Type`, `~Status`, `~Code`
+
+
