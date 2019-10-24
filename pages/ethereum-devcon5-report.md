@@ -14,6 +14,7 @@ Ethereum 1.0
    |------|-------|---------|
    | Started At |  2015-06-30  | > 51 Months |
    | Node Number  | ~ 7,000 | 2019 |
+   | Account Number | > 77,000,000 | 2019/10/13 |
    | Block Number | > 8,700,000 | 2019/10/15 |
    | Block Time   | ~ 13 sec    | 2019/10/15 |
    | Transaction Number | > 560,000,000 | 2019/10/15 |
@@ -24,6 +25,7 @@ Ethereum 1.0
 * [Etherscan](https://etherscan.io/)
     * [Etherscan > Charts & Stats](https://etherscan.io/charts)
     * [Ethereum Genesis Block](https://etherscan.io/block/0)
+    * [Ethereum Unique Address Growth Rate](https://etherscan.io/chart/address)
 * [Bitcoin Overtakes Ethereum in Node Numbers](https://www.trustnodes.com/2019/01/09/bitcoin-overtakes-ethereum-in-node-numbers) (January 9, 2019)
 * [Are Ethereum Full Nodes Really Full? An Experiment.](https://medium.com/@marcandrdumas/are-ethereum-full-nodes-really-full-an-experiment-b77acd086ca7)
 * [Where is the state data stored?](https://ethereum.stackexchange.com/questions/359/where-is-the-state-data-stored) (Jan 22 '16)
@@ -31,13 +33,16 @@ Ethereum 1.0
 ## EVM
 
 * 256-bit Virtual Machine
+    * maximun **2<sup>256</sup>** &asymp; **10<sup>77</sup>** addressess(accounts)
+
+
 
 ## Account State
 
    | Property | Description | Remarks |
    |----------|-------------|---------|
-   | **`nonce`**  | # of tx. sent for EOA or # of contracts created by the account for contract account |   |
-   | **`balance`** | the # of Wei (10<sup>-18</sup> Ether) |   |
+   | **`nonce`**  | # of tx. sent for EOA or # of contracts created by the account for contract account | scalar value  |
+   | **`balance`** | the # of Wei (10<sup>-18</sup> Ether) | scalar value  |
    | **`storageRoot`** | A 256-bit hash of the root node of a Merkle Patricia tree |   |
    | **`codeHash`** | The hash of the EVM code of this account | immutable |
 
@@ -64,6 +69,37 @@ Ethereum 1.0
 * [Byzantium HF Announcement](https://blog.ethereum.org/2017/10/12/byzantium-hf-announcement/)(October 12, 2017)
 * [Hard Fork No. 4: Spurious Dragon](https://blog.ethereum.org/2016/11/18/hard-fork-no-4-spurious-dragon/)(November 18, 2016)
 * [Istanbul Hard Fork — Everything you need to know](https://medium.com/nuo-news/istanbul-hard-fork-everything-you-need-to-know-about-it-3a29738934e5)
+
+
+Ethereum 2.0
+---------
+
 * [The Roadmap to Serenity](https://media.consensys.net/the-roadmap-to-serenity-bc25d5807268)
 * [Ethereum 2.0 (Serenity) Phases](https://docs.ethhub.io/ethereum-roadmap/ethereum-2.0/eth-2.0-phases/)
+* [State of Ethereum Protocol #1](https://media.consensys.net/state-of-ethereum-protocol-1-d3211dd0f6) (Aug 29, 2018)
+* [State of Ethereum Protocol #2: The Beacon Chain](https://media.consensys.net/state-of-ethereum-protocol-2-the-beacon-chain-c6b6a9a69129) (Oct 27, 2018)
 
+
+![abc](https://miro.medium.com/max/1744/0*ufBJ5S8YX0IGIqng)
+
+
+Solidity Secure Programming
+---------
+
+* [ConsenSys Diligence](https://diligence.consensys.net/)
+* [MythX](https://mythx.io/)
+* [Mythril](https://github.com/ConsenSys/mythril)
+* [VeriSol](https://github.com/microsoft/verisol)
+* [Slither](https://github.com/crytic/slither)
+* [Securify](https://securify.chainsecurity.com/)
+* [VerX](http://verx.ch/)
+* [Solhint](https://protofire.github.io/solhint/)
+
+
+My Schedule
+---------
+
+   | Date | Sessions | Speakers | Description | Remarks |
+   | ---- | -------- | -------- | ----------- | ------- |
+   | 2019/10/08 09:05 | [Formal Verification of Smart Contracts and Protocols: What, Why, How](https://devcon.org/agenda?talk=recON87t6ffg2NFw8) |   |   |   |
+   | 2019/10/11 09:10 | [Ethereum 2.0 Phase 1 & 2 Developer Experience](https://devcon.org/agenda?talk=recFhu9NOO4tYsZs4) |   |   |   |
