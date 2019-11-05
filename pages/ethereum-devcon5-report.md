@@ -99,6 +99,9 @@ toc: true
     * Keeps track of shard cross-links
     * Stores execution environment contracts (In phase 2)
 
+* Beacon Chain does not have data - it will not store the balances of accounts, locations of tokens, state of dapps, or any other information the current blockchain stores. Firstly, it stores the list of Validators. Secondly, it stores attestations.
+* Attestations are confirmed and validator-signed hashes that reference the current state of a given shard.
+
 ### Casper
 
 * For each proposed block, validators stake a portion of their coins on a block which they think will be a valid addition to the chain.
@@ -128,6 +131,10 @@ toc: true
 * The node will become a pending validator on the beacon chain.
 * After a period of time, they will become an active validator who can participate in the PoS protocol.
 * Active validators will take turns to propose new blocks and vote on their validity.
+
+#### Slashing
+
+* Reduction of stake
 
 ### Crosslink
 
