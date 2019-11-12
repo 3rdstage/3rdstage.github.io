@@ -165,6 +165,10 @@ toc: true
 * Plasma chains even include a “roll-back” feature that will be activated if a “bonded truth of spend” request fails due to a fraud attempt by a maleficent actor.
 * Eth 2.0 will feature both solutions so users will be able to choose whether to use the sharded mainnet, a plasma chain, or both, depending on their unique individual needs and preferences.
 
+### Game Theory
+
+* https://en.wikipedia.org/wiki/Game_theory
+
 # Solidity Secure Programming
 
 * [ConsenSys Diligence](https://diligence.consensys.net/)
