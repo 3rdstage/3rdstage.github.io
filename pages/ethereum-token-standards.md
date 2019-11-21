@@ -7,6 +7,8 @@ toc: true
 
 # Ethereum Token Standards
 
+{:toc}
+
 ## ERC 20
 
 * A standard interface for tokens.
