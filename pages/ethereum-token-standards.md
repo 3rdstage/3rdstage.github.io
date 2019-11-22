@@ -122,7 +122,9 @@ toc: true
    | Component | Title | Description | Remarks |
    |-----------|-------|-------------|---------|
    | [ERC-1594](https://github.com/ethereum/EIPs/issues/1594) | Core Security Token Standard | n-chain restriction checking with error signalling, off-chain data injection for transfer restrictions and issuance / redemption semantics |   |
-   | [ERC-1410](https://github.com/ethereum/EIPs/issues/1410) | Partially Fungible Tokens | differentiated ownership / transparent restrictions |
+   | [ERC-1410](https://github.com/ethereum/EIPs/issues/1410) | Partially Fungible Tokens | differentiated ownership / transparent restrictions |   |
+   | [ERC-1643](https://github.com/ethereum/EIPs/issues/1643) | Document Management Standard | document / legend management |   |
+   | [ERC-1644](https://github.com/ethereum/EIPs/issues/1644) | Controller Token Operation Standard | controller operations (force transfer) |   |
 
 ### API
 
@@ -145,9 +147,143 @@ toc: true
 
    | Function/Event | Description | Remarks |
    |----------------|-------------|---------|
-   | `function balanceOf(address _tokenHolder) external view returns (uint256)` |   |   |
+   | `function balanceOf(address _tokenHolder) external view returns (uint256)` | Aggregates a token holders balances across all partitions. |   |
    | `function balanceOfByPartition(bytes32 _partition, address _tokenHolder) external view returns (uint256)` |   |   |
+   | `function partitionsOf(address _tokenHolder) external view returns (bytes32[])` | Return all of the partitions that could be associated with a particular token holder address. |   |
+   | `function totalSupply() external view returns (uint256)` | Returns the total amount of tokens issued across all token holders and partitions. |   |
+   | `function transferByPartition(bytes32 _partition, address _to, uint256 _value, bytes _data) external returns (bytes32)` |   |   |
+   | `function operatorTransferByPartition(bytes32 _partition, address _from, address _to, uint256 _value, bytes _data, bytes _operatorData) external returns (bytes32)` |   |   |
+   | `function canTransferByPartition(address _from, address _to, bytes32 _partition, uint256 _value, bytes _data) external view returns (byte, bytes32, bytes32)` |   |   |
+   | `function authorizeOperator(address _operator) external` | Allows a token holder to set an operator for their tokens across all partitions. |   |
+   | `function revokeOperator(address _operator) external` | Allows a token holder to revoke an operator for their tokens across all partitions. |   |
+   | `function isOperator(address _operator, address _tokenHolder) external view returns (bool)` | Returns whether a specified address is an operator for the given token holder and all partitions. |   |
+   | `function authorizeOperatorByPartition(bytes32 _partition, address _operator) external` | Allows a token holder to set an operator for their tokens on a specific partition. |   |
+   | `function revokeOperatorByPartition(bytes32 _partition, address _operator) external` | Allows a token holder to revoke an operator for their tokens on a specific partition. |   |
+   | `function isOperatorForPartition(bytes32 _partition, address _operator, address _tokenHolder) external view returns (bool)` | Returns whether a specified address is an operator for the given token holder and partition. |   |
 
+~~~solidity
+/// @title ERC-1410 Partially Fungible Token Standard
+/// @dev See https://github.com/SecurityTokenStandard/EIP-Spec
+
+interface IERC1410 {
+
+    // Token Information
+    function balanceOf(address _tokenHolder) external view returns (uint256);
+    function balanceOfByPartition(bytes32 _partition, address _tokenHolder) external view returns (uint256);
+    function partitionsOf(address _tokenHolder) external view returns (bytes32[]);
+    function totalSupply() external view returns (uint256);
+
+    // Token Transfers
+    function transferByPartition(bytes32 _partition, address _to, uint256 _value, bytes _data) external returns (bytes32);
+    function operatorTransferByPartition(bytes32 _partition, address _from, address _to, uint256 _value, bytes _data, bytes _operatorData) external returns (bytes32);
+    function canTransferByPartition(address _from, address _to, bytes32 _partition, uint256 _value, bytes _data) external view returns (byte, bytes32, bytes32);
+
+    // Operator Information
+    function isOperator(address _operator, address _tokenHolder) external view returns (bool);
+    function isOperatorForPartition(bytes32 _partition, address _operator, address _tokenHolder) external view returns (bool);
+
+    // Operator Management
+    function authorizeOperator(address _operator) external;
+    function revokeOperator(address _operator) external;
+    function authorizeOperatorByPartition(bytes32 _partition, address _operator) external;
+    function revokeOperatorByPartition(bytes32 _partition, address _operator) external;
+
+    // Issuance / Redemption
+    function issueByPartition(bytes32 _partition, address _tokenHolder, uint256 _value, bytes _data) external;
+    function redeemByPartition(bytes32 _partition, uint256 _value, bytes _data) external;
+    function operatorRedeemByPartition(bytes32 _partition, address _tokenHolder, uint256 _value, bytes _operatorData) external;
+
+    // Transfer Events
+    event TransferByPartition(
+        bytes32 indexed _fromPartition,
+        address _operator,
+        address indexed _from,
+        address indexed _to,
+        uint256 _value,
+        bytes _data,
+        bytes _operatorData
+    );
+
+    // Operator Events
+    event AuthorizedOperator(address indexed operator, address indexed tokenHolder);
+    event RevokedOperator(address indexed operator, address indexed tokenHolder);
+    event AuthorizedOperatorByPartition(bytes32 indexed partition, address indexed operator, address indexed tokenHolder);
+    event RevokedOperatorByPartition(bytes32 indexed partition, address indexed operator, address indexed tokenHolder);
+
+    // Issuance / Redemption Events
+    event IssuedByPartition(bytes32 indexed partition, address indexed operator, address indexed to, uint256 amount, bytes data, bytes operatorData);
+    event RedeemedByPartition(bytes32 indexed partition, address indexed operator, address indexed from, uint256 amount, bytes operatorData);
+
+}
+~~~
+
+#### ERC-1643 : Document Management Standard
+
+   | Function/Event | Description | Remarks |
+   |----------------|-------------|---------|
+   | `function getDocument(bytes32 _name) external view returns (string, bytes32, uint256)` |   |   |
+   | `function setDocument(bytes32 _name, string _uri, bytes32 _documentHash) external` | Used to attach a new document to the contract, or update the URI or hash of an existing attached document. |   |
+   | `function removeDocument(bytes32 _name) external` | Used to remove an existing document from the contract. |   |
+   | `function getAllDocuments() view returns (bytes32[])` | Used to retrieve a full list of documents attached to the smart contract. |   |
+
+~~~solidity
+/// @title IERC1643 Document Management (part of the ERC1400 Security Token Standards)
+/// @dev See https://github.com/SecurityTokenStandard/EIP-Spec
+
+interface IERC1643 {
+
+    // Document Management
+    function getDocument(bytes32 _name) external view returns (string, bytes32, uint256);
+    function setDocument(bytes32 _name, string _uri, bytes32 _documentHash) external;
+    function removeDocument(bytes32 _name) external;
+    function getAllDocuments() external view returns (bytes32[]);
+
+    // Document Events
+    event DocumentRemoved(bytes32 indexed _name, string _uri, bytes32 _documentHash);
+    event DocumentUpdated(bytes32 indexed _name, string _uri, bytes32 _documentHash);
+
+}
+~~~
+
+#### ERC-1644: Controller Token Operation Standard
+
+   | Function/Event | Description | Remarks |
+   |----------------|-------------|---------|
+   | `function controllerTransfer(address _from, address _to, uint256 _value, bytes _data, bytes _operatorData) external` | Allows an authorised address to transfer tokens between any two token holders. |   |
+   | `function controllerRedeem(address _tokenHolder, uint256 _value, bytes _data, bytes _operatorData) external` | Allows an authorised address to redeem tokens for any token holder. |   |
+   | `function isControllable() external view returns (bool)` | Provide transparency over whether `controllerTransfer` / `controllerRedeem` are useable or not. |   |
+
+~~~solidity
+/// @title IERC1644 Controller Token Operation (part of the ERC1400 Security Token Standards)
+/// @dev See https://github.com/SecurityTokenStandard/EIP-Spec
+
+interface IERC1644 is IERC20 {
+
+    // Controller Operation
+    function isControllable() external view returns (bool);
+    function controllerTransfer(address _from, address _to, uint256 _value, bytes _data, bytes _operatorData) external;
+    function controllerRedeem(address _tokenHolder, uint256 _value, bytes _data, bytes _operatorData) external;
+
+    // Controller Events
+    event ControllerTransfer(
+        address _controller,
+        address indexed _from,
+        address indexed _to,
+        uint256 _value,
+        bytes _data,
+        bytes _operatorData
+    );
+
+    event ControllerRedemption(
+        address _controller,
+        address indexed _tokenHolder,
+        uint256 _value,
+        bytes _data,
+        bytes _operatorData
+    );
+
+}
+~~~
 
 ## Misc
 
