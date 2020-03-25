@@ -272,11 +272,9 @@ metainformation. |
   | List all organizations    | GET    | `roll/v1/organizations`            |                   | Org[]   |        |
   | Find an organization      | GET    | `roll/v1/organizations/{orgId}`    |                   | Org     |        |
 
-<details>
-<summary>Swagger API</summary>
+{::options parse_block_html="true" /}
 
-<p>
-
+<details><summary markdown="span">Swagger API</summary>
 ```json
 {
    "swagger": "2.0",
@@ -441,6 +439,7 @@ metainformation. |
 </p>
 </details>
 
+{::options parse_block_html="false" /}
 
 #### Service Program Example
 
