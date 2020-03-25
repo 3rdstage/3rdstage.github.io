@@ -275,7 +275,7 @@ metainformation. |
 {::options parse_block_html="true" /}
 
 <details><summary markdown="span">Swagger API</summary>
-```json
+```
 {
    "swagger": "2.0",
    "info": {
@@ -435,8 +435,6 @@ metainformation. |
    }
 }
 ```
-
-</p>
 </details>
 
 {::options parse_block_html="false" /}
