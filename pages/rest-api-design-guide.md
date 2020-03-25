@@ -58,7 +58,7 @@ REST API Design Guide
 * Resources Relationship
     * Relationship type
         * **Mapping** over Hierarchy
-    * Fundamental resources vs Complex resources : 
+    * Fundamental resources vs Complex resources :
         * `User`, `Product`
         * `Sales`, `Order`
     * Relationship representation
@@ -79,7 +79,7 @@ REST API Design Guide
   | Element | Convention | Remarks |
   | ------- | ---------- | ------- |
   | Resource Collection Name | lowerCamelCase |
-  
+
 #### Common Abbreviation
 
   | Abbreviated Name | Full Name           | Remarks |
@@ -88,7 +88,7 @@ REST API Design Guide
   | spec             | specification       |         |
   | stats            | statistics          |         |
   | req              | request             |         |
-  | resp             | response            |         |  
+  | resp             | response            |         |
 
 ### Header
 
@@ -111,7 +111,7 @@ REST API Design Guide
    | `X-Rate-Limit-Remaining` | the number of requests left for the current time window | non-negative integer |   |   |   |
    | `X-Rate-Limit-Reset` | the remaining window before the rate limit resets, in UTC epoch seconds | non-negative integer  |   |   |
    | `X-Page-Ended` |           | boolean     | true    |        |         |
-   
+
 * [Twitter API Rate Limits](https://developer.twitter.com/en/docs/basics/rate-limiting)
 * [GitHub API Rate Limiting](https://developer.github.com/v3/#rate-limiting)
 
@@ -126,10 +126,10 @@ REST API Design Guide
   | **202** | **Accepted** | The request has been accepted for processing, but the processing has not been completed. |   |
   | **204** | **No Content** | The server has fulfilled the request but does not need to return an entity-body, and might want to return updated
 metainformation. |
-  
+
 * 200/OK
     * The information returned with the response is dependent on the method used in the request, for example:
-    
+
       | Method | Return |
       | ------ | ------ |
       | GET    | an entity corresponding to the requested resource is sent in the response |
@@ -140,7 +140,7 @@ metainformation. |
 * 201/Created
     * The newly created resource can be referenced by the URI(s) returned in the entity of the response, with the most specific URI for the resource given by a Location header field. The response SHOULD include an entity containing a list of resource characteristics and location(s) from which the user or user agent can choose the one most appropriate. The entity format is specified by the media type given in the Content-Type header field. The origin server MUST create the resource before returning the 201 status code. If the action cannot be carried out immediately, the server SHOULD respond with 202 (Accepted)
     * A 201 response MAY contain an ETag response header field indicating the current value of the entity tag for the requested variant just created response instead.
-    
+
 * 202/Accepted
     * The request might or might not eventually be acted upon, as it might be disallowed when processing actually takes place. There is no facility for re-sending a status code from an asynchronous operation such as this.
     * The 202 response is intentionally non-committal. Its purpose is to allow a server to accept a request for some other process (perhaps a batch-oriented process that is only run once per day) without requiring that the user agent's connection to the server persist until the process is completed. The entity returned with this response SHOULD include an indication of the request's current status and either a pointer to a status monitor or some estimate of when the user can expect the request to be fulfilled.
@@ -158,7 +158,7 @@ metainformation. |
   | ----- | ---- | ------ | ------------ | ------- |
   | When the client accesses undefined API(URL) | **404** | **Not Found** | Framework |   |
   | When the request is not 'application/json' type | **415** | **Unsupported Media Type** | Framework | What if the API doesn't need request body ? |
-  | When the client is not properly authenticated | **401** | **Unauthorized** | Framework |   | 
+  | When the client is not properly authenticated | **401** | **Unauthorized** | Framework |   |
   | When the client accesses the API that is not permitted to him/her | **403** | **Forbidden** | Framework |   |
   | When the client send JSON data that can't be parsed | **400** | **Bad Request** | Framework |   |
   | When the request doesn't contain required parameters | **400** | **Bad Request** | Framework |   |
@@ -166,7 +166,7 @@ metainformation. |
   | When the resource (`User`, `Product`, `Order`, `Point`, ...) to find, update or remove doesn't exist | **404** | **Not Found** | Controller |   |
   | When the resource to add already exists |   |   |   |   |
   | When the server causes errors processing the request | **500** | **Internal Server Error** | Controller | network error, data access error |
-  
+
 * [List of HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 * [Twitter API Error Codes & Responses](https://developer.twitter.com/en/docs/basics/response-codes)
 * [GitHub API Client Errors](https://developer.github.com/v3/#client-errors)
@@ -197,7 +197,7 @@ metainformation. |
 #### Pagination
 
 * Listing API should always be paginated.
-* Parameters : 
+* Parameters :
 
     | Parameter | Description | Datatype | Value Space | Remarks |
     | --------- | ----------- | -------- | ----------- | ------- |
@@ -273,10 +273,14 @@ metainformation. |
   | Add a organization        | POSt   | `roll/v1/organizations`            | Org               |         |        |
   | List all organizations    | GET    | `roll/v1/organizations`            |                   | Org[]   |        |
   | Find an organization      | GET    | `roll/v1/organizations/{orgId}`    |                   | Org     |        |
-  
-##### Swagger API 
 
-~~~~json
+##### Swagger API
+
+<details>
+<summary>Swagger API</summary>
+<p>
+
+```json
 {
    "swagger": "2.0",
    "info": {
@@ -429,13 +433,15 @@ metainformation. |
                }
             },
             "phoneNumberValidations": {
-               
+
             }
          }
       }
    }
 }
-~~~~
+\```
+
+</p>
+</details>
 
 
-   
