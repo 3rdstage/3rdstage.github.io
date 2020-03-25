@@ -274,8 +274,8 @@ metainformation. |
 
 {::options parse_block_html="true" /}
 
-<details><summary markdown="span">Swagger API</summary>
-```
+<details style='margin-left:40px'><summary markdown='span'>Swagger API</summary>
+```json
 {
    "swagger": "2.0",
    "info": {
