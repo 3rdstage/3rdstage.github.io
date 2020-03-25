@@ -30,6 +30,12 @@ REST API Design Guide
 * [Instagram APIs](https://www.instagram.com/developer/endpoints/)
 * [GitHub API v3](https://developer.github.com/v3/)
 
+* [HTTP Flow](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#HTTP_flow)
+* [HTTP Messages](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#HTTP_Messages)
+* [HTTP (on Wikipedia)](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
+* [List of HTTP Header Fields](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)
+* [List of HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
 ### Common Concepts
 
 #### Date, Time, Interval, Duration
@@ -206,7 +212,7 @@ metainformation. |
 
 #### Base API
 
-  | Title                                   | Method | URL                  | Req. Body | Resp. Body | Remakrs |
+  | Title                                   | Method | Path                 | Req. Body | Resp. Body | Remakrs |
   | --------------------------------------- | ------ | -------------------- | --------- | ---------- | ------- |
   | Get current version of messages         | `GET`  | `/messages/version`  |           |            |         |
   | List all defined messages or message templates | `GET` | `/messages`    |           |            |         |
@@ -216,6 +222,16 @@ metainformation. |
   | List current developers of this application | `GET` | `/crews/current`  |           |            |         |
   | List past developers who is not working for this appl any more but .. | `GET` | `/crews/past` |  |    |    |
   | List release notes                      | `GET`  | `/releasenotes`      |           |            |         |
+
+#### Complex Resources Hierarchy
+
+##### GitHub API Style
+
+  | Method Path    | Title       | Remarks  |
+  |----------------|-------------|----------|
+  | [`GET /users/:username/repos`](https://developer.github.com/v3/repos/#list-repositories-for-a-user) | List repositories for a user   |
+  | [`GET /repos/:owner/:repo/releases`](https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository) | List releases for a repository |
+
 
 ### Standard
 
@@ -243,8 +259,8 @@ metainformation. |
 
 #### User Service Example
 
-  | Title | Method | URL | Body | Return | Remarks |
-  | ----- | ------ | --- | ---- | ------ | ------- |
+  | Title | Method | Path | Body | Return | Remarks |
+  | ----- | ------ | ---- | ---- | ------ | ------- |
   | Add a user                | POST   | `roll/v1/users`                    | User(id=null)    |          |        |
   | List all users            | GET    | `roll/v1/users`                    |                  | User[]   |        |
   | List all valid users      | GET    | `roll/v1/users/valid`              |                  | User[]   |        |
@@ -441,8 +457,8 @@ metainformation. |
 
 #### Service Program Example
 
-  | Title | Method | URL | Privilege | Body | Return | Remarks |
-  | ----- | ------ | --- | --------- | ---- | ------ | ------- |
+  | Title | Method | Path | Privilege | Body | Return | Remarks |
+  | ----- | ------ | ---- | --------- | ---- | ------ | ------- |
   | List service program entry posts | GET | `service/entryPosts` | `user` |      | EntryPost[] |
   | Add a new service program entry post | POST | `service/entryPosts`             | `user` | EntryPost |        | the owner of the post = current session, No one can add other user's post
   | Add a new 'Like' for a entry post | POST | `service/entryPosts/{postId}/likes` | `user` |      |             | the user who add a like = current session
@@ -465,8 +481,8 @@ metainformation. |
 
 #### Block Explorer Example
 
-  | Title | Method | URL | Privilege | Body | Return | Remarks |
-  | ----- | ------ | --- | --------- | ---- | ------ | ------- |
+  | Title | Method | Path | Privilege | Body | Return | Remarks |
+  | ----- | ------ | ---- | --------- | ---- | ------ | ------- |
   | Find a block of specified no | GET | `blocks/{blockNo}` |   |      | Block |
   | Find recent blocks           | GET | `blocks/recent`    |   |      | BlockHeader[] |
   | Find initial blocks          | GET | `blocks/inital`    |   |      | BlockHeader[] |
