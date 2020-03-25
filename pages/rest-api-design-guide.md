@@ -274,6 +274,7 @@ metainformation. |
 
 <details>
 <summary>Swagger API</summary>
+
 <p>
 
 ```json
