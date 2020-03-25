@@ -243,8 +243,6 @@ metainformation. |
 
 #### User Service Example
 
-##### REST API
-
   | Title | Method | URL | Body | Return | Remarks |
   | ----- | ------ | --- | ---- | ------ | ------- |
   | Add a user                | POST   | `roll/v1/users`                    | User(id=null)    |          |        |
@@ -273,8 +271,6 @@ metainformation. |
   | Add a organization        | POSt   | `roll/v1/organizations`            | Org               |         |        |
   | List all organizations    | GET    | `roll/v1/organizations`            |                   | Org[]   |        |
   | Find an organization      | GET    | `roll/v1/organizations/{orgId}`    |                   | Org     |        |
-
-##### Swagger API
 
 <details>
 <summary>Swagger API</summary>
@@ -439,9 +435,47 @@ metainformation. |
       }
    }
 }
-\```
+```
 
 </p>
 </details>
 
+
+#### Service Program Example
+
+  | Title | Method | URL | Privilege | Body | Return | Remarks |
+  | ----- | ------ | --- | --------- | ---- | ------ | ------- |
+  | List service program entry posts | GET | `service/entryPosts` | `user` |      | EntryPost[] |
+  | Add a new service program entry post | POST | `service/entryPosts`             | `user` | EntryPost |        | the owner of the post = current session, No one can add other user's post
+  | Add a new 'Like' for a entry post | POST | `service/entryPosts/{postId}/likes` | `user` |      |             | the user who add a like = current session
+  | Cancel a 'Like' for a entry post  | DELETE | `service/entryPost/{postId}/likes` | `user` |     |            | the user who cancel a like = current session
+  | List service programs            | GET | `service/programs`                    | `user` |      | Program[]  |
+  | List open service programs       | GET | `service/programs/open`               | `user` |      | Program[]  |
+  | List service programs in process | GET | `service/programs/started`            | `user` |      | Program[]  |
+  | List service programs reivewed   | GET | `service/programs/completed`          | `user` |      | Program[]  |
+  | Find a service program           | GET | `service/programs/{programId}`        | `user` |      | Program    |
+  | Find a open service program      | GET | `service/programs/open/{programId}`   | `user` |      | Program    |
+  | List service programs coordinated by a coordinator | GET | `service/programs/coordinatedBy/{coordinatorId}` | `user` |     |     |
+  | Get a coordinator of the service program | GET | `service/programs/{programId}/coordinator` | `user` |     |     |
+  | Update the review of the service program | PUT | `service/programs/{programId}/` | `user` | Review |     |
+  | List my service program entries | GET | `service/programs/-/entries/belongToMe`  | `user` |        | Entry[] | the owner of the program entry = current session
+  | Find a single my service program entry | GET | `service/programs/-/entries/{entryId}` | `user` |     | Entry |  the owner of the program entry == current session
+  | Cancel a certain my service program entry | DELETE | `service/programs/-/entries/{entryId}` | `user` |     |     | the owner of the program entry == current session
+  | List program entries of a certain user | GET | `service/programs/-/entries/belongTo/{userId}` | `admin` |     | Entry[] |
+  | Find a program entry            | GEt | `service/programs/-/entries/{entryId}` | `admin` |     | Entry |
+
+
+#### Block Explorer Example
+
+  | Title | Method | URL | Privilege | Body | Return | Remarks |
+  | ----- | ------ | --- | --------- | ---- | ------ | ------- |
+  | Find a block of specified no | GET | `blocks/{blockNo}` |   |      | Block |
+  | Find recent blocks           | GET | `blocks/recent`    |   |      | BlockHeader[] |
+  | Find initial blocks          | GET | `blocks/inital`    |   |      | BlockHeader[] |
+  | Find blocks within the specified interval | GET | `blocks/within?from={from}&to={to}` |   |      | BlockHeader[] |
+  | Find blocks before the specified date  | GET | `blocks/before/{when}` |   |     | BlockHeader[] |
+  | Find blocks after the specified date | GET | `blocks/after/{when}` |   |     | BlockHeader[] |
+  | Find blocks of today                 | GET | `blocks/today`        |   |     | BlockHeader[] |
+  | Find blocks at the specified date    | GET | `blocks/daily/{date}` |   |     | BlockHeader[] |
+  | Find blocks in the specified month   | GET | `blocks/monthly/{date}` |   |   | BlockHeader[] |
 
