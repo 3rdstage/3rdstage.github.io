@@ -21,20 +21,23 @@ REST API Design Guide
 * [Representational state transfer (on Wikipedia)](https://en.wikipedia.org/wiki/Representational_state_transfer)
 * [Google Cloud APIs API Design Guide](https://cloud.google.com/apis/design/)
 * [Microsoft REST API Guidelines](https://github.com/microsoft/api-guidelines)
+* [Kubernetes API Conventions](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md)
 * [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
 * [Understanding REST Parameters](https://www.soapui.org/rest-testing/understanding-rest-parameters.html)
 * [REST API Syntax](https://github.com/Esri/geoportal-server/wiki/REST-API-Syntax)
-
-* [Gmail API Reference](https://developers.google.com/gmail/api/v1/reference/)
-* [Twitter REST APIs](https://developer.twitter.com/en/docs)
-* [Instagram APIs](https://www.instagram.com/developer/endpoints/)
-* [GitHub API v3](https://developer.github.com/v3/)
 
 * [HTTP Flow](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#HTTP_flow)
 * [HTTP Messages](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview#HTTP_Messages)
 * [HTTP (on Wikipedia)](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol)
 * [List of HTTP Header Fields](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)
 * [List of HTTP Status Codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
+
+#### Best Practices
+
+* [Gmail API Reference](https://developers.google.com/gmail/api/v1/reference/)
+* [Twitter REST APIs](https://developer.twitter.com/en/docs)
+* [Instagram APIs](https://www.instagram.com/developer/endpoints/)
+* [GitHub API v3](https://developer.github.com/v3/)
 
 ### Common Concepts
 
@@ -492,4 +495,47 @@ metainformation. |
   | Find blocks of today                 | GET | `blocks/today`        |   |     | BlockHeader[] |
   | Find blocks at the specified date    | GET | `blocks/daily/{date}` |   |     | BlockHeader[] |
   | Find blocks in the specified month   | GET | `blocks/monthly/{date}` |   |   | BlockHeader[] |
+
+#### Community Example
+
+```
+POST /circles user
+
+PUT /circles/{circleId} user
+
+POST /circles/{circleId}/invitations user
+
+GET /circles/_/invitations/belongTo/{userId} admin
+
+PUT /circles/_/invitations/{invitationId}/deny
+
+PUT /circles/_/invitations/{invitationId}/accept
+
+POST /circles/{circleId}/memebers
+
+PUT /circles/{circleId}/memebers/{userId}
+
+PUT /circles/belongsTo/{userId}?start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize}
+
+GET /activities/{activityId} admin
+
+GET /activities/count admin
+
+GET /activities?userId={userId}&type={type}&start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize} admin
+
+GET /activites/recent admin
+
+POST /activities admin
+
+PUT /activities/{activityId} admin
+
+GET /activities/mine/{activityId} user
+
+GET /activities/mine/count user
+
+GET /activities/mine?type={type}&start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize} user
+
+GET /activities/mine/recent user
+
+```
 
