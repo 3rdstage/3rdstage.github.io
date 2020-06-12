@@ -260,6 +260,121 @@ metainformation. |
   | --- | ----- | ---- | ------- |
   | `GET /users/self/` | Get information about the owner of access token. | [Instagram User Endpoints](https://www.instagram.com/developer/endpoints/users/) |
 
+#### Service Program Example
+
+  | Title | Method | Path | Privilege | Body | Return | Remarks |
+  | ----- | ------ | ---- | --------- | ---- | ------ | ------- |
+  | List service program entry posts | GET | `service/entryPosts` | `user` |      | EntryPost[] |
+  | Add a new service program entry post | POST | `service/entryPosts`             | `user` | EntryPost |        | the owner of the post = current session, No one can add other user's post
+  | Add a new 'Like' for a entry post | POST | `service/entryPosts/{postId}/likes` | `user` |      |             | the user who add a like = current session
+  | Cancel a 'Like' for a entry post  | DELETE | `service/entryPost/{postId}/likes` | `user` |     |            | the user who cancel a like = current session
+  | List service programs            | GET | `service/programs`                    | `user` |      | Program[]  |
+  | List open service programs       | GET | `service/programs/open`               | `user` |      | Program[]  |
+  | List service programs in process | GET | `service/programs/started`            | `user` |      | Program[]  |
+  | List service programs reivewed   | GET | `service/programs/completed`          | `user` |      | Program[]  |
+  | Find a service program           | GET | `service/programs/{programId}`        | `user` |      | Program    |
+  | Find a open service program      | GET | `service/programs/open/{programId}`   | `user` |      | Program    |
+  | List service programs coordinated by a coordinator | GET | `service/programs/coordinatedBy/{coordinatorId}` | `user` |     |     |
+  | Get a coordinator of the service program | GET | `service/programs/{programId}/coordinator` | `user` |     |     |
+  | Update the review of the service program | PUT | `service/programs/{programId}/` | `user` | Review |     |
+  | List my service program entries | GET | `service/programs/-/entries/belongToMe`  | `user` |        | Entry[] | the owner of the program entry = current session
+  | Find a single my service program entry | GET | `service/programs/-/entries/{entryId}` | `user` |     | Entry |  the owner of the program entry == current session
+  | Cancel a certain my service program entry | DELETE | `service/programs/-/entries/{entryId}` | `user` |     |     | the owner of the program entry == current session
+  | List program entries of a certain user | GET | `service/programs/-/entries/belongTo/{userId}` | `admin` |     | Entry[] |
+  | Find a program entry            | GEt | `service/programs/-/entries/{entryId}` | `admin` |     | Entry |
+
+
+#### Block Explorer Example
+
+  | Title | Method | Path | Privilege | Body | Return | Remarks |
+  | ----- | ------ | ---- | --------- | ---- | ------ | ------- |
+  | Find a block of specified no | GET | `blocks/{blockNo}` |   |      | Block |
+  | Find recent blocks           | GET | `blocks/recent`    |   |      | BlockHeader[] |
+  | Find initial blocks          | GET | `blocks/inital`    |   |      | BlockHeader[] |
+  | Find blocks within the specified interval | GET | `blocks/within?from={from}&to={to}` |   |      | BlockHeader[] |
+  | Find blocks before the specified date  | GET | `blocks/before/{when}` |   |     | BlockHeader[] |
+  | Find blocks after the specified date | GET | `blocks/after/{when}` |   |     | BlockHeader[] |
+  | Find blocks of today                 | GET | `blocks/today`        |   |     | BlockHeader[] |
+  | Find blocks at the specified date    | GET | `blocks/daily/{date}` |   |     | BlockHeader[] |
+  | Find blocks in the specified month   | GET | `blocks/monthly/{date}` |   |   | BlockHeader[] |
+
+#### Community Example
+
+```
+POST /circles user
+
+PUT /circles/{circleId} user
+
+POST /circles/{circleId}/invitations user
+
+GET /circles/_/invitations/belongTo/{userId} admin
+
+PUT /circles/_/invitations/{invitationId}/deny
+
+PUT /circles/_/invitations/{invitationId}/accept
+
+POST /circles/{circleId}/memebers
+
+PUT /circles/{circleId}/memebers/{userId}
+
+PUT /circles/belongsTo/{userId}?start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize}
+
+GET /activities/{activityId} admin
+
+GET /activities/count admin
+
+GET /activities?userId={userId}&type={type}&start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize} admin
+
+GET /activites/recent admin
+
+POST /activities admin
+
+PUT /activities/{activityId} admin
+
+GET /activities/mine/{activityId} user
+
+GET /activities/mine/count user
+
+GET /activities/mine?type={type}&start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize} user
+
+GET /activities/mine/recent user
+
+```
+
+#### Donation Token Example
+
+##### Address aware style
+
+| API | Description |
+| --- | ----------- |
+| `GET /token/accounts/{address}/balance`     | Get the balance of the account in the token |
+| `GET /token/accounts/{address}/transfers`   | List the transfers of the account |
+| `GET /token/accounts/{senderAddr}/transfers/recipients/{recepientAddr}` | List the transfers from the specified sender to the specified recepient |
+| `GET /token/transfers/-/senders/{senderAddr}/recipients/{recipientAddr}` |   |
+| `POST /token/transfers/-/senders/{senderAddr}/recipients/{recipientAddr}` |   |
+
+
+##### Address unaware/corse grained style
+
+| API | Description |
+| --- | ----------- |
+| `POST /token/transfers/senders/{senderId}/recipients/{recipientId}` |   |
+| `POST /token/trasnfers/senders;id={senderId};type={senderType}/recipients;id={recipientId};type={recipientId}/` |   |
+
+##### Address unaware/fine grained style
+
+| API | Description |
+| --- | ----------- |
+| `POST /token/mint-transfers/donors/{donorId}/campaings/{campaignId}` |  Mint tokens to the donor and immediately transfer(donate) the tokens to the campaign |
+| `POST /token/transfers/donors/{donorId}/campaigns/{campaignId}` | Transfer tokens from the donor account to the campaign account |
+| `POST /token/trasnfers/campaigns/{campaignId}/projects/{projectId}` | Trasfer tokes from the campaign account to the project account |
+| `GET /token/accounts/donors/{donorId}/balance` |
+| `GET /token/accounts/campaings/{campaginId}/balance` |
+| `GET /token/accounts/projects/{projectId}/balance` |
+| `GET /receipts/donations/{receiptId}` |   |
+| `GET /receipts/donations/donors/{donorId}` |   |
+
+
 #### User Service Example
 
   | Title | Method | Path | Body | Return | Remarks |
@@ -457,85 +572,3 @@ metainformation. |
 </details>
 
 {::options parse_block_html="false" /}
-
-#### Service Program Example
-
-  | Title | Method | Path | Privilege | Body | Return | Remarks |
-  | ----- | ------ | ---- | --------- | ---- | ------ | ------- |
-  | List service program entry posts | GET | `service/entryPosts` | `user` |      | EntryPost[] |
-  | Add a new service program entry post | POST | `service/entryPosts`             | `user` | EntryPost |        | the owner of the post = current session, No one can add other user's post
-  | Add a new 'Like' for a entry post | POST | `service/entryPosts/{postId}/likes` | `user` |      |             | the user who add a like = current session
-  | Cancel a 'Like' for a entry post  | DELETE | `service/entryPost/{postId}/likes` | `user` |     |            | the user who cancel a like = current session
-  | List service programs            | GET | `service/programs`                    | `user` |      | Program[]  |
-  | List open service programs       | GET | `service/programs/open`               | `user` |      | Program[]  |
-  | List service programs in process | GET | `service/programs/started`            | `user` |      | Program[]  |
-  | List service programs reivewed   | GET | `service/programs/completed`          | `user` |      | Program[]  |
-  | Find a service program           | GET | `service/programs/{programId}`        | `user` |      | Program    |
-  | Find a open service program      | GET | `service/programs/open/{programId}`   | `user` |      | Program    |
-  | List service programs coordinated by a coordinator | GET | `service/programs/coordinatedBy/{coordinatorId}` | `user` |     |     |
-  | Get a coordinator of the service program | GET | `service/programs/{programId}/coordinator` | `user` |     |     |
-  | Update the review of the service program | PUT | `service/programs/{programId}/` | `user` | Review |     |
-  | List my service program entries | GET | `service/programs/-/entries/belongToMe`  | `user` |        | Entry[] | the owner of the program entry = current session
-  | Find a single my service program entry | GET | `service/programs/-/entries/{entryId}` | `user` |     | Entry |  the owner of the program entry == current session
-  | Cancel a certain my service program entry | DELETE | `service/programs/-/entries/{entryId}` | `user` |     |     | the owner of the program entry == current session
-  | List program entries of a certain user | GET | `service/programs/-/entries/belongTo/{userId}` | `admin` |     | Entry[] |
-  | Find a program entry            | GEt | `service/programs/-/entries/{entryId}` | `admin` |     | Entry |
-
-
-#### Block Explorer Example
-
-  | Title | Method | Path | Privilege | Body | Return | Remarks |
-  | ----- | ------ | ---- | --------- | ---- | ------ | ------- |
-  | Find a block of specified no | GET | `blocks/{blockNo}` |   |      | Block |
-  | Find recent blocks           | GET | `blocks/recent`    |   |      | BlockHeader[] |
-  | Find initial blocks          | GET | `blocks/inital`    |   |      | BlockHeader[] |
-  | Find blocks within the specified interval | GET | `blocks/within?from={from}&to={to}` |   |      | BlockHeader[] |
-  | Find blocks before the specified date  | GET | `blocks/before/{when}` |   |     | BlockHeader[] |
-  | Find blocks after the specified date | GET | `blocks/after/{when}` |   |     | BlockHeader[] |
-  | Find blocks of today                 | GET | `blocks/today`        |   |     | BlockHeader[] |
-  | Find blocks at the specified date    | GET | `blocks/daily/{date}` |   |     | BlockHeader[] |
-  | Find blocks in the specified month   | GET | `blocks/monthly/{date}` |   |   | BlockHeader[] |
-
-#### Community Example
-
-```
-POST /circles user
-
-PUT /circles/{circleId} user
-
-POST /circles/{circleId}/invitations user
-
-GET /circles/_/invitations/belongTo/{userId} admin
-
-PUT /circles/_/invitations/{invitationId}/deny
-
-PUT /circles/_/invitations/{invitationId}/accept
-
-POST /circles/{circleId}/memebers
-
-PUT /circles/{circleId}/memebers/{userId}
-
-PUT /circles/belongsTo/{userId}?start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize}
-
-GET /activities/{activityId} admin
-
-GET /activities/count admin
-
-GET /activities?userId={userId}&type={type}&start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize} admin
-
-GET /activites/recent admin
-
-POST /activities admin
-
-PUT /activities/{activityId} admin
-
-GET /activities/mine/{activityId} user
-
-GET /activities/mine/count user
-
-GET /activities/mine?type={type}&start={start}&end={end}&pageNo={pageNo}&pageSize={pageSize} user
-
-GET /activities/mine/recent user
-
-```
-
